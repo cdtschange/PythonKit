@@ -1,7 +1,7 @@
 'readTextFile.py -- read and display text file'
 
 # get filename
-fname = input('Enter filename: ')
+fname = raw_input('Enter filename: ')
 print
 
 # attempt to open file for reading
@@ -12,5 +12,5 @@ except IOError as e:
 else:
     # display contents to the Screen
     for eachLine in fobj:
-        print(eachLine,end='')
+        print eachLine,
     fobj.close()

@@ -9,11 +9,11 @@ tcpCliSock = socket(AF_INET, SOCK_STREAM)
 tcpCliSock.connect(ADDR)
 
 while True:
-    data = input('> ')
+    data = raw_input('> ')
     if not data:
         break;
-    tcpCliSock.send(data.encode())
-    data = tcpCliSock.recv(BUFSIZ).decode()
+    tcpCliSock.send(data)
+    data = tcpCliSock.recv(BUFSIZ)
     if not data:
         break;
     print(data)

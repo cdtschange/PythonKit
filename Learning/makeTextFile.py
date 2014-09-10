@@ -6,7 +6,7 @@ ls = os.linesep
 
 # get filename
 while True:
-    fname = input('Enter file name: ');
+    fname = raw_input('Enter file name: ');
     if os.path.exists(fname):
         print("ERROR: '%s' already exists" % fname)
     else:
@@ -18,7 +18,7 @@ print("\nEnter lines ('.' by iteself to quit),\n")
 
 #loop util user terminates input
 while True:
-    entry = input('> ')
+    entry = raw_input('> ')
     if entry == '.':
         break
     else:
