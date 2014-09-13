@@ -1,5 +1,4 @@
 import cgi
-from __builtin__ import str
 
 header = 'Content-Type: text/html\n\n'
 
