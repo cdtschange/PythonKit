@@ -1,29 +1,23 @@
+from mongoengine import *
+
 from restful.baseProvider import BaseProvider
 from ucenter.model.user import User
-from flask_restful.fields import String
+
 
 class UserProvider(BaseProvider):
-    
-    users = []
-    count = 0
 
     def loadById(self, oid):
-        datas = self.load()
-        for user in datas:
-            if oid == user.uid:
-                return user
-        return None
+        return User.objects(id=oid).first()
     
     def load(self):
-        return self.users
+        return User.objects()
     
     def create(self, params):
-        self.count += 1
-        user = User()
-        user.uid = str(self.count);
+        uname = ''
         if params['name'] is not None:
-            user.name = params['name']
-        self.users.append(user)
+            uname = params['name']
+        user = User(name=uname)
+        user.save()
         return user
     
     def updateById(self, oid, params):
@@ -32,13 +26,14 @@ class UserProvider(BaseProvider):
             return
         if params['name'] is not None:
             user.name = params['name']
+        user.save()
         return user
         
     def deleteById(self, oid):
         user = self.loadById(oid)
         if user is None:
             return False
-        self.users.remove(user)
+        user.delete()
         return True
     
         
