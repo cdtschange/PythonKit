@@ -1,0 +1,1 @@
+CONST_SERVER_NAME = 'ucenter'

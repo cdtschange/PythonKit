@@ -1,6 +1,12 @@
 #coding=utf-8
 from core.baseResult import *
 
+def valide_params(keys, params):
+    for key in keys:
+        if key not in params:
+            return False
+    return True
+
 def base_get_list(provider):
     objs = provider.load();
     result = baseJson()

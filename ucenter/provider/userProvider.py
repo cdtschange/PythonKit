@@ -1,3 +1,4 @@
+#coding=utf-8
 from mongoengine import *
 from pymongo import *
 import json
@@ -16,7 +17,7 @@ class UserProvider(BaseProvider):
         uparams = {}
         filters = ['name','password','mobile','email']
         for key in filters:
-            if params[key] is not None:
+            if key not in params:
                 uparams[key] = params[key]
         return super(UserProvider, self).create(uparams)
     
@@ -25,7 +26,7 @@ class UserProvider(BaseProvider):
         uparams = {}
         filters = ['name','password','mobile','email']
         for key in filters:
-            if params[key] is not None:
+            if key not in params:
                 uparams[key] = params[key]
         return super(UserProvider, self).updateById(oid, uparams)
         
@@ -33,4 +34,13 @@ class UserProvider(BaseProvider):
         collection = self.modelClass._get_collection()
         obj = collection.find_one({'name': name},{id:0})
         return obj is not None
-        
+    
+    def login(self, name, password):
+        collection = self.modelClass._get_collection()
+        obj = collection.find_one({'name': name},{id:0})
+        if obj is None:
+            return None, '用户不存在'
+        if obj.password != password:
+            return None, '用户密码错误'
+        collection.update({'name': name},{'$inc':{'logincnt':1}})
+        return obj
