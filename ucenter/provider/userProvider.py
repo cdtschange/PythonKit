@@ -1,39 +1,36 @@
 from mongoengine import *
+from pymongo import *
+import json
+from bson import json_util
+from bson.json_util import dumps
 
-from restful.baseProvider import BaseProvider
+from core.baseProvider import BaseProvider
 from ucenter.model.user import User
 
 
 class UserProvider(BaseProvider):
-
-    def loadById(self, oid):
-        return User.objects(id=oid).first()
     
-    def load(self):
-        return User.objects()
+    modelClass = User
     
     def create(self, params):
-        uname = ''
-        if params['name'] is not None:
-            uname = params['name']
-        user = User(name=uname)
-        user.save()
-        return user
+        uparams = {}
+        filters = ['name','password','mobile','email']
+        for key in filters:
+            if params[key] is not None:
+                uparams[key] = params[key]
+        return super(UserProvider, self).create(uparams)
+    
     
     def updateById(self, oid, params):
-        user = self.loadById(oid)
-        if user is None:
-            return
-        if params['name'] is not None:
-            user.name = params['name']
-        user.save()
-        return user
+        uparams = {}
+        filters = ['name','password','mobile','email']
+        for key in filters:
+            if params[key] is not None:
+                uparams[key] = params[key]
+        return super(UserProvider, self).updateById(oid, uparams)
         
-    def deleteById(self, oid):
-        user = self.loadById(oid)
-        if user is None:
-            return False
-        user.delete()
-        return True
-    
+    def isExistByName(self, name):
+        collection = self.modelClass._get_collection()
+        obj = collection.find_one({'name': name},{id:0})
+        return obj is not None
         

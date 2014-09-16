@@ -6,10 +6,10 @@ import json
 from bson import json_util
 from bson.json_util import dumps
 
-from restful.baseAPI import BaseApi
-from restful.baseResult import BaseResult
+from core.baseAPI import base_get_list, base_post_obj, base_put_obj,\
+    base_delete_obj
+from core.baseResult import baseJson
 from ucenter.provider.userProvider import UserProvider
-from ucenter.model.user import User
 
 app = Flask(__name__)
 api = Api(app)
@@ -23,66 +23,36 @@ userProvider = UserProvider()
 
 @app.route('/users', methods = ['GET'])
 def users_get():
-    result = BaseResult().json()
-    users = userProvider.load();
-    if len(users) > 0:
-        result['users'] =  json.loads(users.to_json())
-    else:
-        result['users'] = []
-    return dumps(result)
+    return dumps(base_get_list(userProvider))
 
 @app.route('/users', methods = ['POST'])
 def users_post():
-    result = BaseResult().json()
     args = parser.parse_args()
-    user = userProvider.create(args)
-    if user is None:
-        result.status = 201
-        result.msg = '创建用户失败'
-        return dumps(result), 201
-    result['user'] = json.loads(user.to_json())
+    result, obj = base_post_obj(userProvider,args)
+    if obj is not None:
+        result['user'] = obj
     return dumps(result), 201  
 
-@app.route('/users/<string:uid>', methods = ['GET'])
-def user_get(uid):
-    result = BaseResult().json()
-    user = userProvider.loadById(uid)
-    if user is None:
-        result.status = 404
-        result.msg = '用户不存在'
-        return dumps(result), 404
-    result['user'] = json.loads(user.to_json())
-    return dumps(result)
+@app.route('/users/<string:oid>', methods = ['GET'])
+def user_get(oid):
+    result, obj = base_post_obj(userProvider,oid)
+    if obj is not None:
+        result['user'] = obj
+    return dumps(result), 404
 
-@app.route('/users/<string:uid>', methods = ['PUT'])
-def put(uid):
-    result = BaseResult().json()
-    user = userProvider.loadById(uid)
-    if user is None:
-        result.status = 404
-        result.msg = '用户不存在'
-        return dumps(result), 404
+@app.route('/users/<string:oid>', methods = ['PUT'])
+def user_put(oid):
     args = parser.parse_args()
-    user = userProvider.updateById(uid, args)
-    if user is None:
-        result.status = 201
-        result.msg = '更新用户失败'
-        return dumps(result), 201
-    result['user'] = json.loads(user.to_json())
+    result, obj = base_put_obj(userProvider,oid,args)
+    if obj is not None:
+        result['user'] = obj
     return dumps(result), 201
 
-@app.route('/users/<string:uid>', methods = ['DELETE'])
-def delete(uid):
-    result = BaseResult().json()
-    if not userProvider.isExistById(uid):
-        result.status = 404
-        result.msg = '用户不存在'
-        return dumps(result), 404
-    success = userProvider.deleteById(uid)
-    if not success:
-        result.status = 204
-        result.msg = '删除用户失败'
-        return dumps(result), 204
+@app.route('/users/<string:oid>', methods = ['DELETE'])
+def user_delete(oid):
+    result, obj = base_delete_obj(userProvider,oid)
+    if obj is not None:
+        result['user'] = obj
     return dumps(result), 204
    
 
