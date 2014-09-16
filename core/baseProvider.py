@@ -1,59 +1,81 @@
+#coding=utf-8
+from flask import Flask
 import json
 from bson import json_util
 from bson.json_util import dumps
+from bson.objectid import ObjectId
 from pymongo import *
+
 
 class BaseProvider(object):
     
-    modelClass = None
+    def getCollection(self):
+        return None
+    
+    def objToDictionary(self, obj):
+        data = json.loads(json.dumps(obj, default=json_util.default))
+        if '_id' in data and '$oid' in data['_id']:
+            data['oid'] = data['_id']['$oid']
+            del data['_id']
+        return data
     
     def loadById(self, oid):
-        collection = self.modelClass._get_collection()
-        obj = collection.find_one({'_id': oid},{id:0})
+        collection = self.getCollection()
+        obj = collection.find_one({'_id': ObjectId(oid)})
         if obj is None:
-            return None
-        return json.loads(obj.to_json())
+            return None, '获取失败'
+        return self.objToDictionary(obj), ''
     
     def load(self):
-        collection = self.modelClass._get_collection()
-        objs = collection.find({},{id:0})
+        collection = self.getCollection()
+        objs = collection.find({},{'password':0})
         if objs is None:
             return []
-        return json.loads(objs.to_json())
+        datas = []
+        for obj in objs:
+            data = self.objToDictionary(obj)
+            datas.append(data)
+        return datas
     
     def loadByPage(self, start = 0, num = 20):
-        collection = self.modelClass._get_collection()
+        collection = self.getCollection()
         objs = collection.find({},{id:0}).limit(num).skip(start)
         if objs is None:
             return []
-        return json.loads(objs.to_json())
+        datas = []
+        for obj in objs:
+            data = self.objToDictionary(obj)
+            datas.append(data)
+        return datas
     
     def create(self, params):
-        collection = self.modelClass._get_collection()
+        collection = self.getCollection()
         obj = collection.insert(params)
         if obj is None:
-            return None
-        data = json.loads(obj.to_json())
-        del data['ObjectId']
-        return data
+            return None, '创建失败'
+        return self.objToDictionary(obj), ''
     
     def updateById(self, oid, params):
-        collection = self.modelClass._get_collection()
-        obj = collection.update({'_id': oid},{'$set':params})
+        if params is None or len(params) == 0:
+            return None, '参数错误'
+        collection = self.getCollection()
+        obj = collection.update({'_id': ObjectId(oid)},{'$set':params})
         if obj is None:
-            return None
-        data = json.loads(obj.to_json())
-        del data['ObjectId']
-        return data
+            return None, '更新失败'
+        if obj['updatedExisting'] == False:
+            return None, 'ID不存在'
+        if obj['ok'] != 1 or obj['n'] <= 0:
+            return None, '更新失败'
+        return self.objToDictionary(obj), ''
         
     def deleteById(self, oid):
-        collection = self.modelClass._get_collection()
-        obj = collection.remove({'_id': oid})
+        collection = self.getCollection()
+        obj = collection.remove({'_id': ObjectId(oid)})
         if obj is None:
-            return None
-        data = json.loads(obj.to_json())
-        del data['ObjectId']
-        return data
+            return None, '删除失败'
+        if obj['ok'] != 1 or obj['n'] <= 0:
+            return None, '删除失败'
+        return self.objToDictionary(obj), ''
     
 
     def isExistById(self, oid):

@@ -1,4 +1,7 @@
 #coding=utf-8
+from bson.errors import InvalidId
+
+from core.baseConfig import *
 from core.baseResult import *
 
 def valide_params(keys, params):
@@ -11,40 +14,44 @@ def base_get_list(provider):
     objs = provider.load();
     result = baseJson()
     result['data'] =  objs
-    return result
+    return result, objs
 
 def base_get_list_bypage(provider, start, num):
     objs = provider.loadByPage(start, num);
     result = baseJson()
     result['data'] =  objs
-    return result
+    return result, objs
 
 def base_post_obj(provider, params):
-    obj = provider.create(params)
-    if obj is None:
-        result = baseJson(201, '创建用户失败')
-        return result
-    result = baseJson()
-    return result, obj
+    try:
+        obj, msg = provider.create(params)
+    except Exception, e:
+        return baseJson(404, str(e)), None
+    return baseJson(0 if obj is not None else 201, msg), obj
 
 def base_get_obj(provider, oid):
-    obj = provider.loadById(oid)
-    if obj is None:
-        result = baseJson(404, '用户不存在')
-        return result
-    result = baseJson()
-    return result, obj
+    try:
+        obj, msg = provider.loadById(oid)
+    except InvalidId:
+        return baseJson(CONST_ERROR_CODE_INALIDID, '用户ID不合法'), None
+    except Exception, e:
+        return baseJson(404, str(e)), None
+    return baseJson(0 if obj is not None else 404, msg), obj
 
 def base_put_obj(provider, oid, params):
-    obj = provider.updateById(oid, params)
-    if obj is None:
-        result = baseJson(201, '更新用户失败')
-        return result
-    return result, obj
+    try:
+        obj, msg = provider.updateById(oid, params)
+    except InvalidId:
+        return baseJson(CONST_ERROR_CODE_INALIDID, '用户ID不合法'), None
+    except Exception, e:
+        return baseJson(201, str(e)), None
+    return baseJson(0 if obj is not None else 201, msg), obj
 
 def base_delete_obj(provider, oid):
-    obj = provider.deleteById(oid)
-    if obj is None:
-        result = baseJson(204, '删除用户失败')
-        return result
-    return result, obj
+    try:
+        obj, msg = provider.deleteById(oid)
+    except InvalidId:
+        return baseJson(CONST_ERROR_CODE_INALIDID, '用户ID不合法'), None
+    except Exception, e:
+        return baseJson(204, str(e)), None
+    return baseJson(0 if obj is not None else 204, msg), obj

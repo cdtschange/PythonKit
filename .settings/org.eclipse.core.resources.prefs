@@ -1,5 +1,6 @@
 eclipse.preferences.version=1
 encoding//core/baseAPI.py=utf-8
+encoding//core/baseProvider.py=utf-8
 encoding//sdk/mongoengine-master/tests/fields/fields.py=utf-8
 encoding//ucenter/api/userAPI.py=utf-8
 encoding//ucenter/provider/userProvider.py=utf-8

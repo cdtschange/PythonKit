@@ -7,4 +7,4 @@ class User(BaseModel):
     password = StringField()
     mobile = StringField()
     email = StringField()
-    logincnt = IntegerField()
+    logincnt = IntField()

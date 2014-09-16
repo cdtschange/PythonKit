@@ -4,4 +4,4 @@ class BaseModel(Document):
     '''
     classdocs
     '''
-    _id = StringField(primary_key=True)
+    meta = {'allow_inheritance': True}
