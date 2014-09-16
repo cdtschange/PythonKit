@@ -1,8 +1,14 @@
-from core.baseResult import baseJson
-
+#coding=utf-8
+from core.baseResult import *
 
 def base_get_list(provider):
     objs = provider.load();
+    result = baseJson()
+    result['data'] =  objs
+    return result
+
+def base_get_list_bypage(provider, start, num):
+    objs = provider.loadByPage(start, num);
     result = baseJson()
     result['data'] =  objs
     return result

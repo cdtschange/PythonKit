@@ -1,14 +1,9 @@
-#coding=utf-8
 from flask import Flask
 from flask.ext.restful import reqparse, abort, Api, Resource, fields, marshal
 from mongoengine import *
-import json
-from bson import json_util
 from bson.json_util import dumps
 
-from core.baseAPI import base_get_list, base_post_obj, base_put_obj,\
-    base_delete_obj
-from core.baseResult import baseJson
+from core.baseAPI import *
 from ucenter.provider.userProvider import UserProvider
 
 app = Flask(__name__)
@@ -17,6 +12,9 @@ connect('cdts', host='127.0.0.1', port=27017)
 
 parser = reqparse.RequestParser()
 parser.add_argument('name', type=str)
+parser.add_argument('password', type=str)
+parser.add_argument('mobile', type=str)
+parser.add_argument('email', type=str)
 
 userProvider = UserProvider()
     
@@ -35,7 +33,7 @@ def users_post():
 
 @app.route('/users/<string:oid>', methods = ['GET'])
 def user_get(oid):
-    result, obj = base_post_obj(userProvider,oid)
+    result, obj = base_get_obj(userProvider,oid)
     if obj is not None:
         result['user'] = obj
     return dumps(result), 404
