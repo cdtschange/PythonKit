@@ -45,5 +45,5 @@ class UserProvider(BaseProvider):
         json = self.objToDictionary(obj)
         if 'password' in json and json['password'] != password:
             return None, '用户密码错误'
-        collection.update({'name': name},{'$inc':{'logincnt':1}})
+        collection.update({'name': name},{'$inc':{'loginCnt':1}})
         return json, ''

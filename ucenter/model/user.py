@@ -1,4 +1,5 @@
 from mongoengine import *
+from passlib.apps import custom_app_context as pwd_context
 
 from core.baseModel import BaseModel
 
@@ -18,6 +19,7 @@ class User(BaseModel):
     birthiday = IntField()
     memberGrade = IntField()
     lastLoginTime = IntField()
+    loginCnt = IntField()
     gender = IntField()
     idCardType = IntField()
     idCardNo = StringField()
@@ -26,4 +28,6 @@ class User(BaseModel):
     city = StringField()
     district = StringField()
     postCode = StringField()
-    logincnt = IntField()
+    
+    def hash_password(self, password):
+        self.password = pwd_context.encrypt(password)
