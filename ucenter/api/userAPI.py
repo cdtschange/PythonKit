@@ -1,5 +1,5 @@
 #coding=utf-8
-from flask import Flask, jsonify, Blueprint
+from flask import Flask, jsonify, Blueprint, make_response, request, session
 from flask.ext.restful import reqparse, abort, Api, Resource, fields, marshal
 # from flask.ext.httpauth import HTTPBasicAuth
 from mongoengine import *
@@ -21,6 +21,7 @@ userProvider = UserProvider()
 
 user_api = Blueprint('user_api', __name__)
 
+
 # @auth.get_password
 def get_password(username):
     if username == 'miguel':
@@ -34,20 +35,27 @@ def unauthorized():
 
 @user_api.route('/api/ucenter/login', methods = ['POST'])
 def users_login():
+    print request.cookies
+    print session
     args = parser.parse_args()
     if not valide_params(['name','password'],args):
         return jsonify(baseJson(CONST_ERROR_CODE_UC_INVALIDPARAM, '用户名和密码不能为空'))
     obj, msg = userProvider.login(args['name'], args['password'])
     if obj is None:
         return jsonify(baseJson(501, msg))
+    session['uid'] = obj['oid']
+    session.permanent = True
+    response = app.make_response(rv)() 
+    response.set_cookie('uid',obj['oid'],expires= expires) 
+    print request.cookies
     result = baseJson()
     result['user'] = obj
-    
-# 　　      response = app.make_response() 
-# 　　      response.set_cookie('uid',value=obj._id,max_age=1800) 
-# 　　      return response 
     return jsonify(result)
 
+@app.route('/api/ucenter/logout')
+def users_logout():
+    session.pop('uid', None)
+    
 @user_api.route('/api/ucenter/users', methods = ['GET'])
 def users_get():
     result, msg  = base_get_list(userProvider)

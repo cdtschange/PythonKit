@@ -10,6 +10,7 @@ class User(BaseModel):
     mobileChecked = IntField()
     email = StringField()
     emailChecked = IntField()
+    picsrc = StringField()
     point = IntField()
     ip = StringField()
     deviceID = StringField()
@@ -29,5 +30,10 @@ class User(BaseModel):
     district = StringField()
     postCode = StringField()
     
-    def hash_password(self, password):
-        self.password = pwd_context.encrypt(password)
+    @staticmethod
+    def hash_password(password):
+        return pwd_context.encrypt(password)
+        
+    @staticmethod
+    def verify_password(password, password_hash):
+        return pwd_context.verify(password, password_hash)
