@@ -35,8 +35,6 @@ def unauthorized():
 
 @user_api.route('/api/ucenter/login', methods = ['POST'])
 def users_login():
-    print request.cookies
-    print session
     args = parser.parse_args()
     if not valide_params(['name','password'],args):
         return jsonify(baseJson(CONST_ERROR_CODE_UC_INVALIDPARAM, '用户名和密码不能为空'))
@@ -45,9 +43,6 @@ def users_login():
         return jsonify(baseJson(501, msg))
     session['uid'] = obj['oid']
     session.permanent = True
-    response = app.make_response(rv)() 
-    response.set_cookie('uid',obj['oid'],expires= expires) 
-    print request.cookies
     result = baseJson()
     result['user'] = obj
     return jsonify(result)
