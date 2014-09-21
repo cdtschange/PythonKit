@@ -1,7 +1,6 @@
 #coding=utf-8
 from flask import Flask, jsonify, Blueprint, make_response, request, session
 from flask.ext.restful import reqparse, abort, Api, Resource, fields, marshal
-# from flask.ext.httpauth import HTTPBasicAuth
 from mongoengine import *
 
 from core.baseAPI import *
@@ -9,7 +8,6 @@ from ucenter.provider.userProvider import UserProvider
 from ucenter.config import *
 
 app = Flask(CONST_SERVER_NAME)
-# auth = HTTPBasicAuth()
 
 parser = reqparse.RequestParser()
 parser.add_argument('name', type=str)
@@ -20,18 +18,6 @@ parser.add_argument('email', type=str)
 userProvider = UserProvider()
 
 user_api = Blueprint('user_api', __name__)
-
-
-# @auth.get_password
-def get_password(username):
-    if username == 'miguel':
-        return 'python'
-    return None
-
-# @auth.error_handler
-def unauthorized():
-    return jsonify({'error': '用户未登录'}), 403
-    
 
 @user_api.route('/api/ucenter/login', methods = ['POST'])
 def users_login():

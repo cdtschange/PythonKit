@@ -5,3 +5,5 @@ encoding//sdk/mongoengine-master/tests/fields/fields.py=utf-8
 encoding//ucenter/api/userAPI.py=utf-8
 encoding//ucenter/app.py=utf-8
 encoding//ucenter/provider/userProvider.py=utf-8
+encoding//ucenter/web/home.py=utf-8
+encoding//ucenter/web/userWeb.py=utf-8

@@ -1,0 +1,20 @@
+{% extends "template.html" %}
+{% block content %}
+  <div class="page">
+  <h1>Welcome to Ucenter.</h1>
+  <h3>请登录</h3>
+  {% if error %}
+    <p class=error><strong>错误:</strong> {{ error.decode('utf-8') }}
+  {% endif %}
+  <form action="" method=post>
+    <dl>
+      <dt>用户名:
+      <dd><input type=text name=username value="{{
+          request.form.username }}">
+      <dt>密码:
+      <dd><input type=password name=password>
+    </dl>
+    <p><input type=submit value=登录>
+  </form>
+</div>
+{% endblock %}
