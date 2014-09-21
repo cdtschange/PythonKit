@@ -1,6 +1,7 @@
 #coding=utf-8
 from flask import Flask, jsonify, Blueprint, make_response, request, session
 from flask.ext.restful import reqparse, abort, Api, Resource, fields, marshal
+from flask.ext.login import LoginManager
 # from flask.ext.httpauth import HTTPBasicAuth
 from mongoengine import *
 
@@ -41,18 +42,21 @@ def users_login():
     obj, msg = userProvider.login(args['name'], args['password'])
     if obj is None:
         return jsonify(baseJson(501, msg))
-    session['uid'] = obj['oid']
-    session.permanent = True
+    base_auth_save(obj['oid'])
     result = baseJson()
     result['user'] = obj
     return jsonify(result)
 
-@app.route('/api/ucenter/logout')
+@user_api.route('/api/ucenter/logout', methods = ['GET', 'POST'])
 def users_logout():
-    session.pop('uid', None)
+    base_auth_logout()
+    return jsonify(baseJson())
     
 @user_api.route('/api/ucenter/users', methods = ['GET'])
 def users_get():
+    auth = base_auth_login()
+    if auth:
+        return jsonify(auth);
     result, msg  = base_get_list(userProvider)
     return jsonify(result)
 

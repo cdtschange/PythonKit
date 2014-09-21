@@ -1,14 +1,27 @@
 #coding=utf-8
+from flask import session
 from bson.errors import InvalidId
 
 from core.baseConfig import *
 from core.baseResult import *
+from ucenter.config import CONST_ERROR_CODE_UC_LOGINREQUIRED
 
 def valide_params(keys, params):
     for key in keys:
         if key not in params:
             return False
     return True
+
+def base_auth_login():
+    if not session.get('uid'):
+        return baseJson(CONST_ERROR_CODE_UC_LOGINREQUIRED, '需要登录')
+    return None
+
+def base_auth_save(uid):
+    session['uid'] = uid
+    
+def base_auth_logout():
+    session.pop('uid', None)
 
 def base_get_list(provider):
     objs = provider.load();
