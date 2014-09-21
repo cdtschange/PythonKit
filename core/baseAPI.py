@@ -1,6 +1,7 @@
 #coding=utf-8
-from flask import session
+from flask import session, jsonify
 from bson.errors import InvalidId
+from functools import wraps
 
 from core.baseConfig import *
 from core.baseResult import *
@@ -12,13 +13,21 @@ def valide_params(keys, params):
             return False
     return True
 
-def base_auth_login():
-    if not session.get('uid'):
-        return baseJson(CONST_ERROR_CODE_UC_LOGINREQUIRED, '需要登录')
-    return None
+def login_required(func):
+    @wraps(func)
+    def wrap(*args, **kwargs):
+        if not session.get('uid'):
+            return jsonify(baseJson(CONST_ERROR_CODE_UC_LOGINREQUIRED, '需要登录'))
+        else:
+            return func(*args, **kwargs)
+    return wrap
+        
 
 def base_auth_save(uid):
     session['uid'] = uid
+    
+def base_auth_getUid():
+    return session['uid']
     
 def base_auth_logout():
     session.pop('uid', None)
