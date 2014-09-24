@@ -1,6 +1,6 @@
 #coding=utf-8
 from flask import Flask, jsonify, Blueprint, make_response, request, session
-from flask.ext.restful import reqparse, abort, Api, Resource, fields, marshal
+from flask.ext.restful import reqparse, abort, Api, Resource
 from mongoengine import *
 
 from core.baseAPI import *
