@@ -36,4 +36,5 @@ class User(BaseModel):
         
     @staticmethod
     def verify_password(password, password_hash):
+        print pwd_context.encrypt(password)
         return pwd_context.verify(password, password_hash)
