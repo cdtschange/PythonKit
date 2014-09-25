@@ -1,0 +1,38 @@
+{% extends "admin_template.html" %}
+{% block content %}
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">用户中心</h1>
+          <div>
+	        <form class="form-signin" role="form" action="" method=post>
+	        	<h2 class="form-signin-heading">创建用户</h2>
+	        	<input name=username type="text" class="form-control" placeholder="用户名" required="" autofocus="">
+	        	<input name=password type="password" class="form-control" placeholder="密码" required="">
+	        	<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+	      	</form>
+          </div>
+
+          <h2 class="sub-header">用户列表</h2>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>名称</th>
+                  <th>手机号</th>
+                  <th>邮箱</th>
+                </tr>
+              </thead>
+              <tbody>
+				{% for user in users %}
+                <tr>
+                  <td>{{ user.oid }}</td>
+                  <td>{{ user.name }}</td>
+                  <td>{{ user.mobile }}</td>
+                  <td>{{ user.email }}</td>
+                </tr>
+				{% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+{% endblock %}

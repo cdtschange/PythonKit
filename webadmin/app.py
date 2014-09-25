@@ -7,9 +7,11 @@ from ucenter.config import *
 from config import *
 from ucenter.api.userAPI import user_api
 from core.redisSession import RedisSessionInterface
-from webadmin.web.home import home_web_admin
+from webadmin.web.homeWeb import home_web_admin
+from webadmin.web.userWeb import user_web_admin
 
 import sys
+from webadmin.web.userWeb import user_web_admin
 default_encoding = 'utf-8'
 if sys.getdefaultencoding() != default_encoding:
     reload(sys)
@@ -19,6 +21,7 @@ app = Flask(CONST_SERVER_NAME)
 app.session_interface = RedisSessionInterface()
 app.register_blueprint(user_api)
 app.register_blueprint(home_web_admin)
+app.register_blueprint(user_web_admin)
 # 设置密钥：
 app.secret_key = '\x81\x98\xe8}\xc5\x1d\x96\xfaF\xe0\xa0\x00\x97\x1f)\x02\xf4\\e\xc7K\x9f.\x91'
 

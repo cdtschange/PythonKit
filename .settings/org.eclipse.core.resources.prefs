@@ -10,4 +10,5 @@ encoding//ucenter/web/home.py=utf-8
 encoding//ucenter/web/userWeb.py=utf-8
 encoding//webadmin/api/webadminAPI.py=utf-8
 encoding//webadmin/app.py=utf-8
-encoding//webadmin/web/home.py=utf-8
+encoding//webadmin/web/homeWeb.py=utf-8
+encoding//webadmin/web/userWeb.py=utf-8

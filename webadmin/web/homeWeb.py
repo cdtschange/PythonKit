@@ -23,7 +23,7 @@ def index():
 @home_web_admin.route('/admin/login', methods = ['GET', 'POST'])
 def users_login():
     if base_auth_getUid():
-        return redirect('/')
+        return redirect('/admin/index')
     error = None
     if request.method == 'POST':
         name = request.form['username']
@@ -39,7 +39,6 @@ def users_login():
                 result = baseJson()
                 result['user'] = obj
                 return redirect('/admin/index')
-    print error
     return render_template('admin_login.html', error = error)
 
 @home_web_admin.route('/admin/logout', methods = ['GET', 'POST'])
