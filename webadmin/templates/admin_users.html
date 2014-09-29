@@ -1,38 +1,146 @@
 {% extends "admin_template.html" %}
 {% block content %}
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">用户中心</h1>
-          <div>
-	        <form class="form-signin" role="form" action="" method=post>
-	        	<h2 class="form-signin-heading">创建用户</h2>
-	        	<input name=username type="text" class="form-control" placeholder="用户名" required="" autofocus="">
-	        	<input name=password type="password" class="form-control" placeholder="密码" required="">
-	        	<button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
-	      	</form>
-          </div>
+  <h1 class="page-header"><span class="glyphicon glyphicon-user"></span> 用户中心</h1>
+  <div>
+    <button type="button" data-toggle="modal" data-target="#userModal" class="btn btn-primary">
+      <span class="glyphicon glyphicon-plus-sign"></span> 创建用户
+    </button>
+    <button type="button" data-toggle="modal" data-target="#userModal" class="btn btn-primary">
+      <span class="glyphicon glyphicon-list-alt"></span> 编辑用户
+    </button>
+    <button type="button" class="btn btn-primary">
+      <span class="glyphicon glyphicon-minus-sign"></span> 删除用户
+    </button>
+  </div>
+  <br>
+  <div>
+    <form class="form-search" role="search">
+      <div class="col-lg-6" style="padding-left:0">
+        <input type="text" class="form-control" placeholder="ID/用户名/手机号/邮箱">
+      </div>
+      <button type="submit" class="btn btn-default">
+        <span class="glyphicon glyphicon-search"></span> 搜索
+      </button>
+    </form>
+  </div>
+    <div class="table-responsive">
+      <table id="userTable" class="table table-striped table-hover" data-click-to-select="true" data={{ users|tojson|safe }}>
+        <thead>
+          <tr>
+            <th data-field="state" data-checkbox="true"></th>
+            <th data-field="oid">ID</th>
+            <th data-field="name">用户名</th>
+            <!-- <th>ID</th>
+            <th>用户名</th>
+            <th>手机号</th>
+            <th>邮箱</th>
+            <th>管理员</th> -->
+          </tr>
+        </thead>
+        <tbody>
+       <!--  {% for user in users %}
+          <tr>
+            <td></td>
+            <td>{{ user.oid }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.mobile }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.admin }}</td>
+          </tr>
+        {% endfor %} -->
+        </tbody> 
+      </table>
 
-          <h2 class="sub-header">用户列表</h2>
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>名称</th>
-                  <th>手机号</th>
-                  <th>邮箱</th>
-                </tr>
-              </thead>
-              <tbody>
-				{% for user in users %}
-                <tr>
-                  <td>{{ user.oid }}</td>
-                  <td>{{ user.name }}</td>
-                  <td>{{ user.mobile }}</td>
-                  <td>{{ user.email }}</td>
-                </tr>
-				{% endfor %}
-              </tbody>
-            </table>
+<script type="text/javascript">
+      // var tab = $('#userTable')
+  //     // alert(tab);
+  // var jsonObject = {{ users|tojson|safe }}
+  //     alert(jsonObject);
+
+      
+      // alert(tab);
+      // tab.bootstrapTable({
+      //           method: 'get',
+      //           data:jsonObject
+      //           cache: false,
+      //           height: 400,
+      //           striped: true,
+      //           pagination: true,
+      //           pageSize: 50,
+      //           pageList: [10, 25, 50, 100, 200],
+      //           search: true,
+      //           showColumns: true,
+      //           showRefresh: true,
+      //           minimumCountColumns: 2,
+      //           clickToSelect: true,
+      //           columns: [{
+      //               field: 'state',
+      //               checkbox: true
+      //           }, {
+      //               field: 'oid',
+      //               title: 'Item ID',
+      //               align: 'right',
+      //               valign: 'bottom',
+      //               sortable: true
+      //           }, {
+      //               field: 'name',
+      //               title: 'Item Name',
+      //               align: 'center',
+      //               valign: 'middle',
+      //               sortable: true,
+      //               formatter: nameFormatter
+      //           }]
+      //       });
+      // var xhr = function () {
+
+      //   console.log(arguments);
+      //   return $.ajax({{user}});
+      // };
+
+      // tab.tabulate({
+
+      //   source: jsonObject
+      // })
+      // tab.trigger('load');
+</script>
+    </div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" 
+               data-dismiss="modal" aria-hidden="true">
+                  &times;
+          </button>
+          <h4 class="modal-title" id="myModalLabel">
+               创建用户
+          </h4>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form class="form-signin" role="form" action="" method=post>
+              <input name=username type="text" class="form-control" placeholder="用户名" required="" autofocus="">
+              <input name=password type="password" class="form-control" placeholder="密码" required="">
+              <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+            </form>
           </div>
         </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+               data-dismiss="modal">取消
+            </button>
+            <button type="button" class="btn btn-primary">
+               保存
+            </button>
+        </div>
+      </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+  </div>
+</div>
+
+
 {% endblock %}

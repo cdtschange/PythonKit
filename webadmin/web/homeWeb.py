@@ -45,4 +45,4 @@ def users_login():
 @login_required_web
 def users_logout():
     base_auth_logout()
-    return redirect('/welcome')
+    return redirect('/admin/login')

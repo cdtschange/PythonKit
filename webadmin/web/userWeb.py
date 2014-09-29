@@ -2,6 +2,7 @@
 from flask import Flask, jsonify, Blueprint, make_response, request, session, render_template, redirect, flash
 from flask.ext.restful import reqparse, abort, Api, Resource
 from mongoengine import *
+import json
 
 from core.baseAPI import *
 from ucenter.provider.userProvider import UserProvider
@@ -22,8 +23,6 @@ def users_get():
         pass
     else:
         result, objs = base_get_list(userProvider)
-        if not objs:
-            abort(404)
         return render_template('admin_users.html', users = objs)
 
 @user_web_admin.route('/ucenter/newuser', methods = ['GET', 'POST'])

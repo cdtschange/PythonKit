@@ -1,95 +1,1596 @@
 <!DOCTYPE html>
-<!-- saved from url=(0041)http://v3.bootcss.com/examples/dashboard/ -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="http://v3.bootcss.com/favicon.ico">
 
-    <title>后台管理</title>
+<!-- 
 
-    <!-- Bootstrap core CSS -->
-    <link href="http://v3.bootcss.com/dist/css/bootstrap.min.css" rel="stylesheet">
+Template Name: Metronic - Responsive Admin Dashboard Template build with Twitter Bootstrap 2.3.1
 
-    <!-- Custom styles for this template -->
-    <link href="http://v3.bootcss.com/examples/dashboard/dashboard.css" rel="stylesheet">
+Version: 1.3
 
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="css/ie-emulation-modes-warning.js"></script>
+Author: KeenThemes
 
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-  <style id="holderjs-style" type="text/css"></style><style type="text/css">#yddContainer{display:block;font-family:Microsoft YaHei;position:relative;width:100%;height:100%;top:-4px;left:-4px;font-size:12px;border:1px solid}#yddTop{display:block;height:22px}#yddTopBorderlr{display:block;position:static;height:17px;padding:2px 28px;line-height:17px;font-size:12px;color:#5079bb;font-weight:bold;border-style:none solid;border-width:1px}#yddTopBorderlr .ydd-sp{position:absolute;top:2px;height:0;overflow:hidden}.ydd-icon{left:5px;width:17px;padding:0px 0px 0px 0px;padding-top:17px;background-position:-16px -44px}.ydd-close{right:5px;width:16px;padding-top:16px;background-position:left -44px}#yddKeyTitle{float:left;text-decoration:none}#yddMiddle{display:block;margin-bottom:10px}.ydd-tabs{display:block;margin:5px 0;padding:0 5px;height:18px;border-bottom:1px solid}.ydd-tab{display:block;float:left;height:18px;margin:0 5px -1px 0;padding:0 4px;line-height:18px;border:1px solid;border-bottom:none}.ydd-trans-container{display:block;line-height:160%}.ydd-trans-container a{text-decoration:none;}#yddBottom{position:absolute;bottom:0;left:0;width:100%;height:22px;line-height:22px;overflow:hidden;background-position:left -22px}.ydd-padding010{padding:0 10px}#yddWrapper{color:#252525;z-index:10001;background:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ab20.png);}#yddContainer{background:#fff;border-color:#4b7598}#yddTopBorderlr{border-color:#f0f8fc}#yddWrapper .ydd-sp{background-image:url(chrome-extension://eopjamdnofihpioajgfdikhhbobonhbb/ydd-sprite.png)}#yddWrapper a,#yddWrapper a:hover,#yddWrapper a:visited{color:#50799b}#yddWrapper .ydd-tabs{color:#959595}.ydd-tabs,.ydd-tab{background:#fff;border-color:#d5e7f3}#yddBottom{color:#363636}#yddWrapper{min-width:250px;max-width:400px;}</style></head>
+Website: http://www.keenthemes.com/preview/?theme=metronic
 
-  <body>
+Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469
 
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+-->
+
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+
+<!--[if !IE]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+
+<!-- BEGIN HEAD -->
+
+<head>
+
+  <meta charset="utf-8" />
+
+  <title>Metronic | Admin Dashboard Template</title>
+
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+  <meta content="" name="description" />
+
+  <meta content="" name="author" />
+
+  <!-- BEGIN GLOBAL MANDATORY STYLES -->
+
+  <link href="{{ url_for('static', filename='media/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css"/>
+
+  <link href="{{ url_for('static', filename='media/css/bootstrap-responsive.min.css') }}" rel="stylesheet" type="text/css"/>
+
+  <link href="{{ url_for('static', filename='media/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css"/>
+
+  <link href="{{ url_for('static', filename='media/css/style-metro.css') }}" rel="stylesheet" type="text/css"/>
+
+  <link href="{{ url_for('static', filename='media/css/style.css') }}" rel="stylesheet" type="text/css"/>
+
+  <link href="{{ url_for('static', filename='media/css/style-responsive.css') }}" rel="stylesheet" type="text/css"/>
+
+  <link href="{{ url_for('static', filename='media/css/default.css') }}" rel="stylesheet" type="text/css" id="style_color"/>
+
+  <link href="{{ url_for('static', filename='media/css/uniform.default.css') }}" rel="stylesheet" type="text/css"/>
+
+  <!-- END GLOBAL MANDATORY STYLES -->
+
+  <!-- BEGIN PAGE LEVEL STYLES --> 
+
+  <link href="{{ url_for('static', filename='media/css/jquery.gritter.css') }}" rel="stylesheet" type="text/css"/>
+
+  <link href="{{ url_for('static', filename='media/css/daterangepicker.css') }}" rel="stylesheet" type="text/css" />
+
+  <link href="{{ url_for('static', filename='media/css/fullcalendar.css') }}" rel="stylesheet" type="text/css"/>
+
+  <link href="{{ url_for('static', filename='media/css/jqvmap.css') }}" rel="stylesheet" type="text/css" media="screen"/>
+
+  <link href="{{ url_for('static', filename='media/css/jquery.easy-pie-chart.css') }}" rel="stylesheet" type="text/css" media="screen"/>
+
+  <!-- END PAGE LEVEL STYLES -->
+
+  <link rel="shortcut icon" href="{{ url_for('static', filename='media/image/favicon.ico') }}" />
+
+</head>
+
+<!-- END HEAD -->
+
+<!-- BEGIN BODY -->
+
+<body class="page-header-fixed">
+
+  <!-- BEGIN HEADER -->
+
+  <div class="header navbar navbar-inverse navbar-fixed-top">
+
+    <!-- BEGIN TOP NAVIGATION BAR -->
+
+    <div class="navbar-inner">
+
       <div class="container-fluid">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="./index#">后台管理</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="./index#">概览</a></li>
-            <li><a href="http://v3.bootcss.com/examples/dashboard/#">Settings</a></li>
-            <li><a href="http://v3.bootcss.com/examples/dashboard/#">Profile</a></li>
-            <li><a href="http://v3.bootcss.com/examples/dashboard/#">Help</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
-        </div>
-      </div>
-    </nav>
 
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-3 col-md-2 sidebar">
-          <ul class="nav nav-sidebar">
-            <li class="active"><a href="./index#">概览</a></li>
-            <li><a href="./users#">用户</a></li>
-            <li><a href="http://v3.bootcss.com/examples/dashboard/#">Analytics</a></li>
-            <li><a href="http://v3.bootcss.com/examples/dashboard/#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item</a></li>
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-            <li><a href="">More navigation</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
-          </ul>
-        </div>
-        
-        {% block content %}
-        {% endblock %}
+        <!-- BEGIN LOGO -->
+
+        <a class="brand" href="index">
+
+        <img src="{{ url_for('static', filename='media/image/logo.png') }}" alt="logo"/>
+
+        </a>
+
+        <!-- END LOGO -->
+
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+
+        <a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+
+        <img src="{{ url_for('static', filename='media/image/menu-toggler.png') }}" alt="" />
+
+        </a>          
+
+        <!-- END RESPONSIVE MENU TOGGLER -->            
+
+        <!-- BEGIN TOP NAVIGATION MENU -->              
+
+        <ul class="nav pull-right">
+
+          <!-- BEGIN NOTIFICATION DROPDOWN -->   
+
+          <li class="dropdown" id="header_notification_bar">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+            <i class="icon-warning-sign"></i>
+
+            <span class="badge">6</span>
+
+            </a>
+
+            <ul class="dropdown-menu extended notification">
+
+              <li>
+
+                <p>You have 14 new notifications</p>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="label label-success"><i class="icon-plus"></i></span>
+
+                New user registered. 
+
+                <span class="time">Just now</span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="label label-important"><i class="icon-bolt"></i></span>
+
+                Server #12 overloaded. 
+
+                <span class="time">15 mins</span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="label label-warning"><i class="icon-bell"></i></span>
+
+                Server #2 not respoding.
+
+                <span class="time">22 mins</span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="label label-info"><i class="icon-bullhorn"></i></span>
+
+                Application error.
+
+                <span class="time">40 mins</span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="label label-important"><i class="icon-bolt"></i></span>
+
+                Database overloaded 68%. 
+
+                <span class="time">2 hrs</span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="label label-important"><i class="icon-bolt"></i></span>
+
+                2 user IP blocked.
+
+                <span class="time">5 hrs</span>
+
+                </a>
+
+              </li>
+
+              <li class="external">
+
+                <a href="#">See all notifications <i class="m-icon-swapright"></i></a>
+
+              </li>
+
+            </ul>
+
+          </li>
+
+          <!-- END NOTIFICATION DROPDOWN -->
+
+          <!-- BEGIN INBOX DROPDOWN -->
+
+          <li class="dropdown" id="header_inbox_bar">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+            <i class="icon-envelope"></i>
+
+            <span class="badge">5</span>
+
+            </a>
+
+            <ul class="dropdown-menu extended inbox">
+
+              <li>
+
+                <p>You have 12 new messages</p>
+
+              </li>
+
+              <li>
+
+                <a href="inbox.html?a=view">
+
+                <span class="photo"><img src="media/image/avatar2.jpg" alt="" /></span>
+
+                <span class="subject">
+
+                <span class="from">Lisa Wong</span>
+
+                <span class="time">Just Now</span>
+
+                </span>
+
+                <span class="message">
+
+                Vivamus sed auctor nibh congue nibh. auctor nibh
+
+                auctor nibh...
+
+                </span>  
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="inbox.html?a=view">
+
+                <span class="photo"><img src="./media/image/avatar3.jpg" alt="" /></span>
+
+                <span class="subject">
+
+                <span class="from">Richard Doe</span>
+
+                <span class="time">16 mins</span>
+
+                </span>
+
+                <span class="message">
+
+                Vivamus sed congue nibh auctor nibh congue nibh. auctor nibh
+
+                auctor nibh...
+
+                </span>  
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="inbox.html?a=view">
+
+                <span class="photo"><img src="./media/image/avatar1.jpg" alt="" /></span>
+
+                <span class="subject">
+
+                <span class="from">Bob Nilson</span>
+
+                <span class="time">2 hrs</span>
+
+                </span>
+
+                <span class="message">
+
+                Vivamus sed nibh auctor nibh congue nibh. auctor nibh
+
+                auctor nibh...
+
+                </span>  
+
+                </a>
+
+              </li>
+
+              <li class="external">
+
+                <a href="inbox.html">See all messages <i class="m-icon-swapright"></i></a>
+
+              </li>
+
+            </ul>
+
+          </li>
+
+          <!-- END INBOX DROPDOWN -->
+
+          <!-- BEGIN TODO DROPDOWN -->
+
+          <li class="dropdown" id="header_task_bar">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+            <i class="icon-tasks"></i>
+
+            <span class="badge">5</span>
+
+            </a>
+
+            <ul class="dropdown-menu extended tasks">
+
+              <li>
+
+                <p>You have 12 pending tasks</p>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="task">
+
+                <span class="desc">New release v1.2</span>
+
+                <span class="percent">30%</span>
+
+                </span>
+
+                <span class="progress progress-success ">
+
+                <span style="width: 30%;" class="bar"></span>
+
+                </span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="task">
+
+                <span class="desc">Application deployment</span>
+
+                <span class="percent">65%</span>
+
+                </span>
+
+                <span class="progress progress-danger progress-striped active">
+
+                <span style="width: 65%;" class="bar"></span>
+
+                </span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="task">
+
+                <span class="desc">Mobile app release</span>
+
+                <span class="percent">98%</span>
+
+                </span>
+
+                <span class="progress progress-success">
+
+                <span style="width: 98%;" class="bar"></span>
+
+                </span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="task">
+
+                <span class="desc">Database migration</span>
+
+                <span class="percent">10%</span>
+
+                </span>
+
+                <span class="progress progress-warning progress-striped">
+
+                <span style="width: 10%;" class="bar"></span>
+
+                </span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="task">
+
+                <span class="desc">Web server upgrade</span>
+
+                <span class="percent">58%</span>
+
+                </span>
+
+                <span class="progress progress-info">
+
+                <span style="width: 58%;" class="bar"></span>
+
+                </span>
+
+                </a>
+
+              </li>
+
+              <li>
+
+                <a href="#">
+
+                <span class="task">
+
+                <span class="desc">Mobile development</span>
+
+                <span class="percent">85%</span>
+
+                </span>
+
+                <span class="progress progress-success">
+
+                <span style="width: 85%;" class="bar"></span>
+
+                </span>
+
+                </a>
+
+              </li>
+
+              <li class="external">
+
+                <a href="#">See all tasks <i class="m-icon-swapright"></i></a>
+
+              </li>
+
+            </ul>
+
+          </li>
+
+          <!-- END TODO DROPDOWN -->
+
+          <!-- BEGIN USER LOGIN DROPDOWN -->
+
+          <li class="dropdown user">
+
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+            <img alt="" src="media/image/avatar1_small.jpg" />
+
+            <span class="username">Bob Nilson</span>
+
+            <i class="icon-angle-down"></i>
+
+            </a>
+
+            <ul class="dropdown-menu">
+
+              <li><a href="extra_profile.html"><i class="icon-user"></i> My Profile</a></li>
+
+              <li><a href="page_calendar.html"><i class="icon-calendar"></i> My Calendar</a></li>
+
+              <li><a href="inbox.html"><i class="icon-envelope"></i> My Inbox(3)</a></li>
+
+              <li><a href="#"><i class="icon-tasks"></i> My Tasks</a></li>
+
+              <li class="divider"></li>
+
+              <li><a href="extra_lock.html"><i class="icon-lock"></i> Lock Screen</a></li>
+
+              <li><a href="logout"><i class="icon-key"></i> Log Out</a></li>
+
+            </ul>
+
+          </li>
+
+          <!-- END USER LOGIN DROPDOWN -->
+
+        </ul>
+
+        <!-- END TOP NAVIGATION MENU --> 
+
       </div>
+
     </div>
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="css/jquery.min.js"></script>
-    <script src="css/bootstrap.min.js"></script>
-    <script src="css/docs.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="css/ie10-viewport-bug-workaround.js"></script>
-  
+    <!-- END TOP NAVIGATION BAR -->
 
-<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" title="" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;" data-original-title="Copy to clipboard">      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">         <param name="movie" value="/assets/flash/ZeroClipboard.swf?noCache=1411613690302">         <param name="allowScriptAccess" value="sameDomain">         <param name="scale" value="exactfit">         <param name="loop" value="false">         <param name="menu" value="false">         <param name="quality" value="best">         <param name="bgcolor" value="#ffffff">         <param name="wmode" value="transparent">         <param name="flashvars" value="trustedOrigins=v3.bootcss.com%2C%2F%2Fv3.bootcss.com%2Chttp%3A%2F%2Fv3.bootcss.com">         <embed src="/assets/flash/ZeroClipboard.swf?noCache=1411613690302" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="sameDomain" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="trustedOrigins=v3.bootcss.com%2C%2F%2Fv3.bootcss.com%2Chttp%3A%2F%2Fv3.bootcss.com" scale="exactfit">                </object></div></body></html>
+  </div>
+
+  <!-- END HEADER -->
+
+  <!-- BEGIN CONTAINER -->
+
+  <div class="page-container">
+
+    <!-- BEGIN SIDEBAR -->
+
+    <div class="page-sidebar nav-collapse collapse">
+
+      <!-- BEGIN SIDEBAR MENU -->        
+
+      <ul class="page-sidebar-menu">
+
+        <li>
+
+          <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+          <div class="sidebar-toggler hidden-phone"></div>
+
+          <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+
+        </li>
+
+        <li>
+
+          <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+
+          <form class="sidebar-search">
+
+            <div class="input-box">
+
+              <a href="javascript:;" class="remove"></a>
+
+              <input type="text" placeholder="Search..." />
+
+              <input type="button" class="submit" value=" " />
+
+            </div>
+
+          </form>
+
+          <!-- END RESPONSIVE QUICK SEARCH FORM -->
+
+        </li>
+
+        <li class="start active ">
+
+          <a href="index">
+
+          <i class="icon-home"></i> 
+
+          <span class="title">首页</span>
+
+          <span class="selected"></span>
+
+          </a>
+
+        </li>
+
+        <li class="">
+
+          <a href="users">
+
+          <i class="icon-user"></i> 
+
+          <span class="title">用户</span>
+
+          </a>
+
+        </li>
+
+        <li class="">
+
+          <a href="javascript:;">
+
+          <i class="icon-cogs"></i> 
+
+          <span class="title">Layouts</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li >
+
+              <a href="layout_horizontal_sidebar_menu.html">
+
+              Horzontal & Sidebar Menu</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_horizontal_menu1.html">
+
+              Horzontal Menu 1</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_horizontal_menu2.html">
+
+              Horzontal Menu 2</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_promo.html">
+
+              Promo Page</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_email.html">
+
+              Email Templates</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_ajax.html">
+
+              Content Loading via Ajax</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_sidebar_closed.html">
+
+              Sidebar Closed Page</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_blank_page.html">
+
+              Blank Page</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_boxed_page.html">
+
+              Boxed Page</a>
+
+            </li>
+
+            <li >
+
+              <a href="layout_boxed_not_responsive.html">
+
+              Non-Responsive Boxed Layout</a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="">
+
+          <a href="javascript:;">
+
+          <i class="icon-bookmark-empty"></i> 
+
+          <span class="title">UI Features</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li >
+
+              <a href="ui_general.html">
+
+              General</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_buttons.html">
+
+              Buttons</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_modals.html">
+
+              Enhanced Modals</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_tabs_accordions.html">
+
+              Tabs & Accordions</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_jqueryui.html">
+
+              jQuery UI Components</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_sliders.html">
+
+              Sliders</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_tiles.html">
+
+              Tiles</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_typography.html">
+
+              Typography</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_tree.html">
+
+              Tree View</a>
+
+            </li>
+
+            <li >
+
+              <a href="ui_nestable.html">
+
+              Nestable List</a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="">
+
+          <a href="javascript:;">
+
+          <i class="icon-table"></i> 
+
+          <span class="title">Form Stuff</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li >
+
+              <a href="form_layout.html">
+
+              Form Layouts</a>
+
+            </li>
+
+            <li >
+
+              <a href="form_samples.html">
+
+              Advance Form Samples</a>
+
+            </li>
+
+            <li >
+
+              <a href="form_component.html">
+
+              Form Components</a>
+
+            </li>
+
+            <li >
+
+              <a href="form_wizard.html">
+
+              Form Wizard</a>
+
+            </li>
+
+            <li >
+
+              <a href="form_validation.html">
+
+              Form Validation</a>
+
+            </li>
+
+            <li >
+
+              <a href="form_fileupload.html">
+
+              Multiple File Upload</a>
+
+            </li>
+
+            <li >
+
+              <a href="form_dropzone.html">
+
+              Dropzone File Upload</a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="">
+
+          <a href="javascript:;">
+
+          <i class="icon-briefcase"></i> 
+
+          <span class="title">Pages</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li >
+
+              <a href="page_timeline.html">
+
+              <i class="icon-time"></i>
+
+              Timeline</a>
+
+            </li>
+
+            <li >
+
+              <a href="page_coming_soon.html">
+
+              <i class="icon-cogs"></i>
+
+              Coming Soon</a>
+
+            </li>
+
+            <li >
+
+              <a href="page_blog.html">
+
+              <i class="icon-comments"></i>
+
+              Blog</a>
+
+            </li>
+
+            <li >
+
+              <a href="page_blog_item.html">
+
+              <i class="icon-font"></i>
+
+              Blog Post</a>
+
+            </li>
+
+            <li >
+
+              <a href="page_news.html">
+
+              <i class="icon-coffee"></i>
+
+              News</a>
+
+            </li>
+
+            <li >
+
+              <a href="page_news_item.html">
+
+              <i class="icon-bell"></i>
+
+              News View</a>
+
+            </li>
+
+            <li >
+
+              <a href="page_about.html">
+
+              <i class="icon-group"></i>
+
+              About Us</a>
+
+            </li>
+
+            <li >
+
+              <a href="page_contact.html">
+
+              <i class="icon-envelope-alt"></i>
+
+              Contact Us</a>
+
+            </li>
+
+            <li >
+
+              <a href="page_calendar.html">
+
+              <i class="icon-calendar"></i>
+
+              Calendar</a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="">
+
+          <a href="javascript:;">
+
+          <i class="icon-gift"></i> 
+
+          <span class="title">Extra</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li >
+
+              <a href="extra_profile.html">
+
+              User Profile</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_lock.html">
+
+              Lock Screen</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_faq.html">
+
+              FAQ</a>
+
+            </li>
+
+            <li >
+
+              <a href="inbox.html">
+
+              Inbox</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_search.html">
+
+              Search Results</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_invoice.html">
+
+              Invoice</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_pricing_table.html">
+
+              Pricing Tables</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_image_manager.html">
+
+              Image Manager</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_404_option1.html">
+
+              404 Page Option 1</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_404_option2.html">
+
+              404 Page Option 2</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_404_option3.html">
+
+              404 Page Option 3</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_500_option1.html">
+
+              500 Page Option 1</a>
+
+            </li>
+
+            <li >
+
+              <a href="extra_500_option2.html">
+
+              500 Page Option 2</a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li>
+
+          <a class="active" href="javascript:;">
+
+          <i class="icon-sitemap"></i> 
+
+          <span class="title">3 Level Menu</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li>
+
+              <a href="javascript:;">
+
+              Item 1
+
+              <span class="arrow"></span>
+
+              </a>
+
+              <ul class="sub-menu">
+
+                <li><a href="#">Sample Link 1</a></li>
+
+                <li><a href="#">Sample Link 2</a></li>
+
+                <li><a href="#">Sample Link 3</a></li>
+
+              </ul>
+
+            </li>
+
+            <li>
+
+              <a href="javascript:;">
+
+              Item 1
+
+              <span class="arrow"></span>
+
+              </a>
+
+              <ul class="sub-menu">
+
+                <li><a href="#">Sample Link 1</a></li>
+
+                <li><a href="#">Sample Link 1</a></li>
+
+                <li><a href="#">Sample Link 1</a></li>
+
+              </ul>
+
+            </li>
+
+            <li>
+
+              <a href="#">
+
+              Item 3
+
+              </a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li>
+
+          <a href="javascript:;">
+
+          <i class="icon-folder-open"></i> 
+
+          <span class="title">4 Level Menu</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li>
+
+              <a href="javascript:;">
+
+              <i class="icon-cogs"></i> 
+
+              Item 1
+
+              <span class="arrow"></span>
+
+              </a>
+
+              <ul class="sub-menu">
+
+                <li>
+
+                  <a href="javascript:;">
+
+                  <i class="icon-user"></i>
+
+                  Sample Link 1
+
+                  <span class="arrow"></span>
+
+                  </a>
+
+                  <ul class="sub-menu">
+
+                    <li><a href="#"><i class="icon-remove"></i> Sample Link 1</a></li>
+
+                    <li><a href="#"><i class="icon-pencil"></i> Sample Link 1</a></li>
+
+                    <li><a href="#"><i class="icon-edit"></i> Sample Link 1</a></li>
+
+                  </ul>
+
+                </li>
+
+                <li><a href="#"><i class="icon-user"></i>  Sample Link 1</a></li>
+
+                <li><a href="#"><i class="icon-external-link"></i>  Sample Link 2</a></li>
+
+                <li><a href="#"><i class="icon-bell"></i>  Sample Link 3</a></li>
+
+              </ul>
+
+            </li>
+
+            <li>
+
+              <a href="javascript:;">
+
+              <i class="icon-globe"></i> 
+
+              Item 2
+
+              <span class="arrow"></span>
+
+              </a>
+
+              <ul class="sub-menu">
+
+                <li><a href="#"><i class="icon-user"></i>  Sample Link 1</a></li>
+
+                <li><a href="#"><i class="icon-external-link"></i>  Sample Link 1</a></li>
+
+                <li><a href="#"><i class="icon-bell"></i>  Sample Link 1</a></li>
+
+              </ul>
+
+            </li>
+
+            <li>
+
+              <a href="#">
+
+              <i class="icon-folder-open"></i>
+
+              Item 3
+
+              </a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="">
+
+          <a href="javascript:;">
+
+          <i class="icon-th"></i> 
+
+          <span class="title">Data Tables</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li >
+
+              <a href="table_basic.html">
+
+              Basic Tables</a>
+
+            </li>
+
+            <li >
+
+              <a href="table_responsive.html">
+
+              Responsive Tables</a>
+
+            </li>
+
+            <li >
+
+              <a href="table_managed.html">
+
+              Managed Tables</a>
+
+            </li>
+
+            <li >
+
+              <a href="table_editable.html">
+
+              Editable Tables</a>
+
+            </li>
+
+            <li >
+
+              <a href="table_advanced.html">
+
+              Advanced Tables</a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="">
+
+          <a href="javascript:;">
+
+          <i class="icon-file-text"></i> 
+
+          <span class="title">Portlets</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li >
+
+              <a href="portlet_general.html">
+
+              General Portlets</a>
+
+            </li>
+
+            <li >
+
+              <a href="portlet_draggable.html">
+
+              Draggable Portlets</a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="">
+
+          <a href="javascript:;">
+
+          <i class="icon-map-marker"></i> 
+
+          <span class="title">Maps</span>
+
+          <span class="arrow "></span>
+
+          </a>
+
+          <ul class="sub-menu">
+
+            <li >
+
+              <a href="maps_google.html">
+
+              Google Maps</a>
+
+            </li>
+
+            <li >
+
+              <a href="maps_vector.html">
+
+              Vector Maps</a>
+
+            </li>
+
+          </ul>
+
+        </li>
+
+        <li class="last ">
+
+          <a href="charts.html">
+
+          <i class="icon-bar-chart"></i> 
+
+          <span class="title">Visual Charts</span>
+
+          </a>
+
+        </li>
+
+      </ul>
+
+      <!-- END SIDEBAR MENU -->
+
+    </div>
+
+    <!-- END SIDEBAR -->
+
+    <!-- BEGIN PAGE -->
+
+    <div class="page-content">
+
+      <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+      {% block content %}
+      {% endblock %}
+
+      <!-- END PAGE CONTAINER-->    
+
+    </div>
+
+    <!-- END PAGE -->
+
+  </div>
+
+  <!-- END CONTAINER -->
+
+  <!-- BEGIN FOOTER -->
+
+  <div class="footer">
+
+    <div class="footer-inner">
+
+      2014 &copy; 山天大畜.
+
+    </div>
+
+    <div class="footer-tools">
+
+      <span class="go-top">
+
+      <i class="icon-angle-up"></i>
+
+      </span>
+
+    </div>
+
+  </div>
+
+  <!-- END FOOTER -->
+
+  <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
+
+  <!-- BEGIN CORE PLUGINS -->
+
+  <script src="{{ url_for('static', filename='media/js/jquery-1.10.1.min.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery-migrate-1.2.1.min.js') }}" type="text/javascript"></script>
+
+  <!-- IMPORTANT! Load jquery-ui-1.10.1.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+
+  <script src="{{ url_for('static', filename='media/js/jquery-ui-1.10.1.custom.min.js') }}" type="text/javascript"></script>      
+
+  <script src="{{ url_for('static', filename='media/js/bootstrap.min.js') }}" type="text/javascript"></script>
+
+  <!--[if lt IE 9]>
+
+  <script src="media/js/excanvas.min.js"></script>
+
+  <script src="media/js/respond.min.js"></script>  
+
+  <![endif]-->   
+
+  <script src="{{ url_for('static', filename='media/js/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.blockui.min.js') }}" type="text/javascript"></script>  
+
+  <script src="{{ url_for('static', filename='media/js/jquery.cookie.min.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.uniform.min.js') }}" type="text/javascript" ></script>
+
+  <!-- END CORE PLUGINS -->
+
+  <!-- BEGIN PAGE LEVEL PLUGINS -->
+
+  <script src="{{ url_for('static', filename='media/js/jquery.vmap.js') }}" type="text/javascript"></script>   
+
+  <script src="{{ url_for('static', filename='media/js/jquery.vmap.russia.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.vmap.world.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.vmap.europe.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.vmap.germany.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.vmap.usa.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.vmap.sampledata.js') }}" type="text/javascript"></script>  
+
+  <script src="{{ url_for('static', filename='media/js/jquery.flot.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.flot.resize.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.pulsate.min.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/date.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/daterangepicker.js') }}" type="text/javascript"></script>     
+
+  <script src="{{ url_for('static', filename='media/js/jquery.gritter.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/fullcalendar.min.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.easy-pie-chart.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/jquery.sparkline.min.js') }}" type="text/javascript"></script>  
+
+  <!-- END PAGE LEVEL PLUGINS -->
+
+  <!-- BEGIN PAGE LEVEL SCRIPTS -->
+
+  <script src="{{ url_for('static', filename='media/js/app.js') }}" type="text/javascript"></script>
+
+  <script src="{{ url_for('static', filename='media/js/index.js') }}" type="text/javascript"></script>        
+
+  <!-- END PAGE LEVEL SCRIPTS -->  
+
+  <script>
+
+    jQuery(document).ready(function() {    
+
+       Index.init();
+
+       Index.initJQVMAP(); // init index page's custom scripts
+
+       Index.initCalendar(); // init index page's custom scripts
+
+       Index.initCharts(); // init index page's custom scripts
+
+       Index.initChat();
+
+       Index.initMiniCharts();
+
+       Index.initDashboardDaterange();
+
+       Index.initIntro();
+
+       App.init(); // initlayout and core plugins
+
+    });
+
+  </script>
+
+  <!-- END JAVASCRIPTS -->
+
+<script type="text/javascript">  var _gaq = _gaq || [];  _gaq.push(['_setAccount', 'UA-37564768-1']);  _gaq.push(['_setDomainName', 'keenthemes.com']);  _gaq.push(['_setAllowLinker', true]);  _gaq.push(['_trackPageview']);  (function() {    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);  })();</script></body>
+
+<!-- END BODY -->
+
+</html>
