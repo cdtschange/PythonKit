@@ -1,109 +1,174 @@
 {% extends "admin_template.html" %}
+
+{% block head %}
+
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='media/css/select2_metro.css') }}" />
+
+  <link rel="stylesheet" href="{{ url_for('static', filename='media/css/DT_bootstrap.css') }}" />
+{% endblock %}
+
+
 {% block content %}
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-  <h1 class="page-header"><span class="glyphicon glyphicon-user"></span> 用户中心</h1>
-  <div>
-    <button type="button" data-toggle="modal" data-target="#userModal" class="btn btn-primary">
-      <span class="glyphicon glyphicon-plus-sign"></span> 创建用户
-    </button>
-    <button type="button" data-toggle="modal" data-target="#userModal" class="btn btn-primary">
-      <span class="glyphicon glyphicon-list-alt"></span> 编辑用户
-    </button>
-    <button type="button" class="btn btn-primary">
-      <span class="glyphicon glyphicon-minus-sign"></span> 删除用户
-    </button>
-  </div>
-  <br>
-  <div>
-    <form class="form-search" role="search">
-      <div class="col-lg-6" style="padding-left:0">
-        <input type="text" class="form-control" placeholder="ID/用户名/手机号/邮箱">
+<!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+
+  <div id="portlet-config" class="modal hide">
+
+        <div class="modal-header">
+
+          <button data-dismiss="modal" class="close" type="button"></button>
+
+          <h3>User Settings</h3>
+
+        </div>
+
+        <div class="modal-body">
+
+          User settings form goes here
+
+        </div>
+
       </div>
-      <button type="submit" class="btn btn-default">
-        <span class="glyphicon glyphicon-search"></span> 搜索
-      </button>
-    </form>
-  </div>
-    <div class="table-responsive">
-      <table id="userTable" class="table table-striped table-hover" data-click-to-select="true" data={{ users|tojson|safe }}>
-        <thead>
-          <tr>
-            <th data-field="state" data-checkbox="true"></th>
-            <th data-field="oid">ID</th>
-            <th data-field="name">用户名</th>
-            <!-- <th>ID</th>
-            <th>用户名</th>
-            <th>手机号</th>
-            <th>邮箱</th>
-            <th>管理员</th> -->
-          </tr>
-        </thead>
-        <tbody>
-       <!--  {% for user in users %}
-          <tr>
-            <td></td>
-            <td>{{ user.oid }}</td>
-            <td>{{ user.name }}</td>
-            <td>{{ user.mobile }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.admin }}</td>
-          </tr>
-        {% endfor %} -->
-        </tbody> 
-      </table>
 
-<script type="text/javascript">
-      // var tab = $('#userTable')
-  //     // alert(tab);
-  // var jsonObject = {{ users|tojson|safe }}
-  //     alert(jsonObject);
+      <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
 
-      
-      // alert(tab);
-      // tab.bootstrapTable({
-      //           method: 'get',
-      //           data:jsonObject
-      //           cache: false,
-      //           height: 400,
-      //           striped: true,
-      //           pagination: true,
-      //           pageSize: 50,
-      //           pageList: [10, 25, 50, 100, 200],
-      //           search: true,
-      //           showColumns: true,
-      //           showRefresh: true,
-      //           minimumCountColumns: 2,
-      //           clickToSelect: true,
-      //           columns: [{
-      //               field: 'state',
-      //               checkbox: true
-      //           }, {
-      //               field: 'oid',
-      //               title: 'Item ID',
-      //               align: 'right',
-      //               valign: 'bottom',
-      //               sortable: true
-      //           }, {
-      //               field: 'name',
-      //               title: 'Item Name',
-      //               align: 'center',
-      //               valign: 'middle',
-      //               sortable: true,
-      //               formatter: nameFormatter
-      //           }]
-      //       });
-      // var xhr = function () {
+      <!-- BEGIN PAGE CONTAINER-->
 
-      //   console.log(arguments);
-      //   return $.ajax({{user}});
-      // };
+      <div class="container-fluid">
 
-      // tab.tabulate({
+        <!-- BEGIN PAGE HEADER-->
 
-      //   source: jsonObject
-      // })
-      // tab.trigger('load');
-</script>
+        <div class="row-fluid">
+
+
+          <div class="span12">
+
+
+            <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+
+            <h3 class="page-title">
+
+              用户中心
+
+            </h3>
+
+            <ul class="breadcrumb">
+
+              <li>
+
+                <i class="icon-home"></i>
+
+                <a href="index">首页</a> 
+
+                <i class="icon-angle-right"></i>
+
+              </li>
+
+              <li><a href="#">用户中心</a></li>
+
+            </ul>
+
+            <!-- END PAGE TITLE & BREADCRUMB-->
+
+          </div>
+    
+
+          <div class="span6 responsive" data-tablet="span12 fix-offset" data-desktop="span6">
+
+            <!-- BEGIN EXAMPLE TABLE PORTLET-->
+
+            <div class="portlet box grey">
+
+              <div class="portlet-title">
+
+                <div class="caption"><i class="icon-user"></i>用户</div>
+
+                <div class="actions">
+
+                  <a data-toggle="modal" data-target="#userModal" class="btn blue"><i class="icon-pencil"></i> 添加</a>
+
+                  <div class="btn-group">
+
+                    <a class="btn green" href="#" data-toggle="dropdown">
+
+                    <i class="icon-cogs"></i> 工具
+
+                    <i class="icon-angle-down"></i>
+
+                    </a>
+              
+                    <ul class="dropdown-menu pull-right">
+
+                      <li><a data-toggle="modal" data-target="#userModal"><i class="icon-pencil"></i> 编辑</a></li>
+
+                      <li><a href="#"><i class="icon-trash"></i> 删除</a></li>
+
+                      <li class="divider"></li>
+
+                      <li><a href="#"><i class="i"></i> 设为管理员</a></li>
+
+                    </ul>
+
+                  </div>
+
+                </div>
+
+              </div>
+
+              <div class="portlet-body">
+
+                <table class="table table-striped table-bordered table-hover" id="sample_2">
+
+                  <thead>
+
+                    <tr>
+
+                      <th style="width:8px;"><input type="checkbox" class="group-checkable" data-set="#sample_2 .checkboxes" /></th>
+
+                      <th class="hidden-480">ID</th>
+
+                      <th>用户名</th>
+
+                      <th>邮箱</th>
+
+                    </tr>
+
+                  </thead>
+
+                  <tbody>
+
+                    {% for user in users %}
+
+                    <tr class="odd gradeX">
+
+                      <td><input type="checkbox" class="checkboxes" value="1" /></td>
+
+                      <td>{{user.oid}}</td>
+
+                      <td>{{user.name}}</td>
+
+                      <td>{{user.email}}</td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                  </tbody>
+
+                </table>
+
+              </div>
+
+            </div>
+
+            <!-- END EXAMPLE TABLE PORTLET-->
+
+          </div>
+
+        <!-- END PAGE HEADER-->
+
+
+      </div>
+
     </div>
 
 <!-- 模态框（Modal） -->
@@ -143,4 +208,35 @@
 </div>
 
 
+{% endblock %}
+
+
+{% block foot %}
+<script src="{{ url_for('static', filename='media/js/jquery.vmap.js') }}" type="text/javascript"></script>   
+
+
+  <script type="text/javascript" src="{{ url_for('static', filename='media/js/select2.min.js') }}"></script>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='media/js/jquery.dataTables.js') }}"></script>
+
+  <script type="text/javascript" src="{{ url_for('static', filename='media/js/DT_bootstrap.js') }}"></script>
+
+  <script src="{{ url_for('static', filename='media/js/table-managed.js') }}"></script>   
+{% endblock %}
+
+{% block script %}
+
+  
+  <script>
+
+      jQuery(document).ready(function() {    
+
+         TableManaged.init();
+
+         $('ul.page-sidebar-menu').find($('li')).removeClass("active");
+         $("#li_user").addClass("active");
+
+      });
+
+  </script>
 {% endblock %}
