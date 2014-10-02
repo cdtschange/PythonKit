@@ -193,11 +193,11 @@
 
                     <button class="close" data-dismiss="alert"></button>
 
-                    错误
+                    <span id="errorSpan">错误</span>
 
                   </div>
         <!-- BEGIN FORM-->
-            <form id="form_user" action="users" class="form-horizontal" method="get">
+            <form id="form_user" action="#" class="form-horizontal" method="post">
 
               <div class="control-group">
 
@@ -216,7 +216,7 @@
 
                     <div class="controls">
 
-                      <input name="password" type="password" type="text" class="span6 m-wrap" placeholder="请输入你的密码"/>
+                      <input id="password" name="password" type="password" type="text" class="span6 m-wrap" placeholder="请输入你的密码"/>
 
                     </div>
 
@@ -266,7 +266,7 @@
 
                       <div class="input-icon left">
 
-                        <i class="icon-envelope"></i><input name="email" class="m-wrap " type="text" placeholder="请输入你的邮箱" />  
+                        <i class="icon-envelope"></i><input id="email" name="email" class="m-wrap " type="text" placeholder="请输入你的邮箱" />  
 
                       </div>
 
@@ -300,7 +300,6 @@
                     </div>
 
               </div>
-              <button type="submit" value="Submit" class="submit"/>
             </form>
                 <!-- END FORM-->
           </div>
@@ -358,6 +357,13 @@
          FormUserValidation.init();
          $('ul.page-sidebar-menu').find($('li')).removeClass("active");
          $("#li_user").addClass("active");
+
+         $('#userModal').on('shown.bs.modal', function () {
+            $('body').css('overflow','hidden');
+         });
+         $('#userModal').on('hide.bs.modal', function () {
+            $('body').css('overflow','auto');
+         });
       });
 
   </script>

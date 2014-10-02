@@ -8,12 +8,12 @@ var FormUserValidation = function () {
             // for more info visit the official plugin documentation: 
             // http://docs.jquery.com/Plugins/Validation
 
-            var form1 = $('#from_user');
+            var form1 = $('.form-horizontal');
             var error1 = $('.alert-error', form1);
             var success1 = $('.alert-success', form1);
 
             form1.validate({
-                errorElement: 'span', //default input error message container
+                errorElement: 'label', //default input error message container
                 errorClass: 'help-inline', // default input error message class
                 focusInvalid: false, // do not focus the last invalid input
                 ignore: "",
@@ -25,7 +25,14 @@ var FormUserValidation = function () {
                     },
                     password: {
                         required: true,
+                        minlength: 5,
                         maxlength: 20
+                    },
+                    password2: {
+                        required: true,
+                        minlength: 5,
+                        maxlength: 20,
+                        equalTo: "#password"
                     },
                     email: {
                         required: true,
@@ -41,12 +48,30 @@ var FormUserValidation = function () {
                         required: "用户名不能为空",
                         minlength: "用户名长度不能小于2个字符",
                         maxlength: "用户名长度不能大于20个字符"
+                    },
+                    password: {
+                        required: "密码不能为空",
+                        minlength: "密码长度不能小于5个字符",
+                        maxlength: "密码长度不能大于20个字符"
+                    },
+                    password2: {
+                        required: "密码不能为空",
+                        minlength: "密码长度不能小于5个字符",
+                        maxlength: "密码长度不能大于20个字符",
+                        equalTo: "密码两次输入不一致"
+                    },
+                    email: {
+                        required: "邮箱不能为空",
+                        email: "邮箱地址无效"
+                    },
+                    mobile: {
+                        required: "手机号不能为空",
+                        number: "手机号无效"
                     }
                 },
 
-                invalidHandler: function (event, validator) { //display error alert on form submit            
+                invalidHandler: function (event, validator) { //display error alert on form submit    
                     error1.show();
-                    App.scrollTo(error1, -200);
                 },
 
                 highlight: function (element) { // hightlight error inputs
@@ -69,18 +94,14 @@ var FormUserValidation = function () {
 
                 submitHandler: function (form) {
                     error1.hide();
-                    alert(1)
                     form.submit();
                 }
             });
 
-            
-
             $('#btnSubmit').on('click', function(){
-                alert(form1.validate());
-                if (form1.validate().form()) {
-                        form1.submit();
-                    }
+                if ($('.form-horizontal').validate().form()) {
+                    $('.form-horizontal').submit();
+                }
             }
          );
 
