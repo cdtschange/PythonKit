@@ -20,7 +20,19 @@ user_web_admin = Blueprint('user_web_admin', __name__)
 @login_required_web
 def users_get():
     if request.method == 'POST':
-        pass
+        name = request.form['username']
+        password = request.form['password']
+        gender = request.form['gender']
+        email = request.form['email']
+        mobile = request.form['mobile']
+        isadmin = request.form['isadmin']
+        args = {'name':name, 'password':password, 'gender':gender
+                , 'email':email, 'mobile':mobile, 'isadmin':isadmin}
+        result, obj = base_post_obj(userProvider,args)
+        error = None
+        if result and result['status'] != 0 or obj is None:
+            error = result['msg']
+        return render_template('admin_users.html', error = error)
     else:
         result, objs = base_get_list(userProvider)
         return render_template('admin_users.html', users = objs)
