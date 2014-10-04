@@ -94,7 +94,27 @@ var FormUserValidation = function () {
 
                 submitHandler: function (form) {
                     error1.hide();
-                    form.submit();
+                    // form.submit();
+                    $.ajax({
+                        cache: false,
+                        type: "POST",
+                        url:'/admin/users',
+                        data:$('.form-horizontal').serialize(),// 你的formid
+                        async: false,
+                        error: function(request) {
+                            alert("Connection error1");
+                        },
+                        success: function(data) {
+                            alert(data)
+                            if(data.msg){
+                            alert(data.msg);
+                                error1.show();
+                                document.getElementById("errorSpan").innerText=data.msg;
+                                return;
+                            }
+                            alert(data);
+                        }
+                    });
                 }
             });
 

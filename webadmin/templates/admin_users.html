@@ -204,7 +204,7 @@
                     <label class="control-label">用户名</label>
 
                     <div class="controls">
-                      <input name="username" type="text" class="span6 m-wrap popovers" data-trigger="hover" data-content="字母、数字或下划线，须以字母打头" data-original-title="提示" placeholder="请输入你的用户名"/>
+                      <input name="username" type="text" value="{{ request.form.username }}" class="span6 m-wrap popovers" data-trigger="hover" data-content="字母、数字或下划线，须以字母打头" data-original-title="提示" placeholder="请输入你的用户名"/>
 
                     </div>
 
@@ -216,7 +216,7 @@
 
                     <div class="controls">
 
-                      <input id="password" name="password" type="password" type="text" class="span6 m-wrap" placeholder="请输入你的密码"/>
+                      <input id="password" name="password" value="{{ request.form.password }}" type="password" type="text" class="span6 m-wrap" placeholder="请输入你的密码"/>
 
                     </div>
 
@@ -228,7 +228,7 @@
 
                     <div class="controls">
 
-                      <input name="password2" type="password" type="text" class="span6 m-wrap" placeholder="请再次输入你的密码"/>
+                      <input name="password2" type="password" value="{{ request.form.password2 }}" type="text" class="span6 m-wrap" placeholder="请再次输入你的密码"/>
 
                     </div>
 
@@ -266,7 +266,7 @@
 
                       <div class="input-icon left">
 
-                        <i class="icon-envelope"></i><input id="email" name="email" class="m-wrap " type="text" placeholder="请输入你的邮箱" />  
+                        <i class="icon-envelope"></i><input id="email" name="email" value="{{ request.form.email }}" class="m-wrap " type="text" placeholder="请输入你的邮箱" />  
 
                       </div>
 
@@ -281,7 +281,7 @@
 
                       <div class="input-icon left">
 
-                        <i class="icon-phone"></i><input name="mobile" class="m-wrap " type="text" placeholder="请输入你的手机号" />  
+                        <i class="icon-phone"></i><input name="mobile" value="{{ request.form.mobile }}" class="m-wrap " type="text" placeholder="请输入你的手机号" />  
 
                       </div>
                     </div>
@@ -294,7 +294,7 @@
 
                       <label class="checkbox">
 
-                      <input name="isadmin" type="checkbox" value="" />
+                      <input id="isadminCkb" name="isadmin" type="checkbox"  value="{{ request.form.isadmin }}" />
                       </label>
 
                     </div>
@@ -364,6 +364,14 @@
          $('#userModal').on('hide.bs.modal', function () {
             $('body').css('overflow','auto');
          });
+         $('#isadminCkb').on("click", function(){
+            alert($(this).attr("checked"))
+            if ($(this).attr("checked")==undefined) { 
+              $(this).attr("checked","checked");
+            } else {
+              $(this).attr("checked",false);
+            }
+        });
       });
 
   </script>

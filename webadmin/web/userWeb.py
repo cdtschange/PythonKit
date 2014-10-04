@@ -18,44 +18,30 @@ user_web_admin = Blueprint('user_web_admin', __name__)
 
 @user_web_admin.route('/admin/users', methods = ['GET', 'POST'])
 @login_required_web
-def users_get():
+def users_get_post():
     if request.method == 'POST':
         name = request.form['username']
         password = request.form['password']
-        gender = request.form['gender']
+        gender = request.form['genderRadio']
         email = request.form['email']
         mobile = request.form['mobile']
-        isadmin = request.form['isadmin']
+        isadmin = request.form.getlist('isadmin')
+        print isadmin
         args = {'name':name, 'password':password, 'gender':gender
-                , 'email':email, 'mobile':mobile, 'isadmin':isadmin}
+                , 'email':email, 'mobile':mobile}
+        print args
         result, obj = base_post_obj(userProvider,args)
-        error = None
-        if result and result['status'] != 0 or obj is None:
-            error = result['msg']
-        return render_template('admin_users.html', error = error)
+        if obj is not None:
+            result['user'] = obj
+        return jsonify(result), 201  
+#         if result and result['status'] != 0 or obj is None:
+#             error = result['msg']
+#             return redirect('#')
+#         return render_template('admin_users.html')
     else:
         result, objs = base_get_list(userProvider)
         return render_template('admin_users.html', users = objs)
 
-@user_web_admin.route('/ucenter/newuser', methods = ['GET', 'POST'])
-@login_required
-def users_post():
-    error = None
-    if request.method == 'POST':
-        name = request.form['username']
-        password = request.form['password']
-        if not name or not password:
-            error = '用户名或密码不能为空'
-        else:
-            args = {'name':name, 'password':password}
-            result, obj = base_post_obj(userProvider,args)
-            if result and result['status'] != 0 or obj is None:
-                error = result['msg']
-            else:
-                flash('创建成功')
-        return render_template('newuser.html', error = error)
-    else:
-        return render_template('newuser.html', error = error)
 
 @user_web_admin.route('/ucenter/users/<string:oid>', methods = ['GET'])
 @login_required_web

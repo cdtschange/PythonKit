@@ -27,7 +27,7 @@ def login_required_web(func):
     def wrap(*args, **kwargs):
         if not session.get('uid', None):
             flash('请先登录')
-            return redirect('/ucenter/login')
+            return redirect('/admin/login')
         else:
             return func(*args, **kwargs)
     return wrap

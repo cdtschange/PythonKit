@@ -21,13 +21,18 @@ class UserProvider(BaseProvider):
     
     def create(self, params):
         uparams = {}
-        filters = ['name','password','mobile','email']
+        filters = ['name','password','gender','mobile','email','isadmin']
+        if 'name' not in params or params['name'] is None:
+            return None, '用户名不能为空'
         for key in params:
             if key in filters and params[key] is not None:
                 if key == 'password':
                     uparams[key] = User.hash_password(params[key])
                     continue
                 uparams[key] = params[key]
+        isExist = self.isExistByName(params['name'])
+        if isExist:
+            return None, '用户名已存在'
         return super(UserProvider, self).create(uparams)
     
     
