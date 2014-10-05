@@ -8,6 +8,7 @@ encoding//ucenter/app.py=utf-8
 encoding//ucenter/provider/userProvider.py=utf-8
 encoding//ucenter/web/home.py=utf-8
 encoding//ucenter/web/userWeb.py=utf-8
+encoding//utils/taobaogolden/taobaogolden.py=utf-8
 encoding//webadmin/api/webadminAPI.py=utf-8
 encoding//webadmin/app.py=utf-8
 encoding//webadmin/web/homeWeb.py=utf-8
