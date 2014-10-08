@@ -98,7 +98,7 @@
               
                     <ul class="dropdown-menu pull-right">
 
-                      <li><a data-toggle="modal" data-target="#userModal"><i class="icon-pencil"></i> 编辑</a></li>
+                      <li><a id="btnEditUser" data-toggle="modal" data-target="#userModal"><i class="icon-pencil"></i> 编辑</a></li>
 
                       <li><a href="#"><i class="icon-trash"></i> 删除</a></li>
 
@@ -130,6 +130,10 @@
 
                       <th>邮箱</th>
 
+                      <th>手机号</th>
+
+                      <th>管理员</th>
+
                     </tr>
 
                   </thead>
@@ -147,6 +151,11 @@
                       <td>{{user.name}}</td>
 
                       <td>{{user.email}}</td>
+
+                      <td>{{user.mobile}}</td>
+
+                      <td><input type="checkbox" class="checkboxes" disabled="True" 
+                      {% if user.isadmin %} checked="checked" {% endif %} /></td>
 
                     </tr>
 
@@ -294,7 +303,8 @@
 
                       <label class="checkbox">
 
-                      <input id="isadminCkb" name="isadmin" type="checkbox"  value="{{ request.form.isadmin }}" />
+                      <input id="isadminCkb" name="isadmin" type="checkbox" 
+                      {% if request.form.isadmin %} checked="checked" {% endif %} />
                       </label>
 
                     </div>
@@ -364,14 +374,26 @@
          $('#userModal').on('hide.bs.modal', function () {
             $('body').css('overflow','auto');
          });
-         $('#isadminCkb').on("click", function(){
-            alert($(this).attr("checked"))
-            if ($(this).attr("checked")==undefined) { 
-              $(this).attr("checked","checked");
-            } else {
-              $(this).attr("checked",false);
-            }
-        });
+         $('#btnEditUser').on('click', function(){
+            $('tbody').find('tr').each(function(){
+              cbx = $(this).find('.checkboxes')[0];
+              if (cbx.checked) {
+                oid = $(this).find('td')[1].textContent;
+              };
+              // tr = $(this).find('tr');
+              // cbx = this.find('td')[0];
+              // if (cbx.checked) {
+              //   alert(1);
+              // };
+            // alert($(this).find('td').eq(1).find('input').val());
+            // alert($(this).find('td').eq(2).find('select').val());
+            });
+            // var rows=$('#trUser');
+            // alert(rows.length);
+            // for(var i=0;i<rows.length;i++){
+            //   alert(rows[i]);
+            // }
+         });
       });
 
   </script>

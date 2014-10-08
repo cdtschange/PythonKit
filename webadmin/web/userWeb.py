@@ -26,9 +26,9 @@ def users_get_post():
         email = request.form['email']
         mobile = request.form['mobile']
         isadmin = request.form.getlist('isadmin')
-        print isadmin
+        isadmin = len(isadmin)
         args = {'name':name, 'password':password, 'gender':gender
-                , 'email':email, 'mobile':mobile}
+                , 'email':email, 'mobile':mobile, 'isadmin':isadmin}
         print args
         result, obj = base_post_obj(userProvider,args)
         if obj is not None:

@@ -102,17 +102,16 @@ var FormUserValidation = function () {
                         data:$('.form-horizontal').serialize(),// 你的formid
                         async: false,
                         error: function(request) {
-                            alert("Connection error1");
+                            error1.show();
+                            document.getElementById("errorSpan").innerText="服务器错误";
                         },
                         success: function(data) {
-                            alert(data)
-                            if(data.msg){
-                            alert(data.msg);
+                            if(data.status>0 && data.msg){
                                 error1.show();
                                 document.getElementById("errorSpan").innerText=data.msg;
                                 return;
                             }
-                            alert(data);
+                            window.location.reload();
                         }
                     });
                 }
