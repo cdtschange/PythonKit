@@ -213,7 +213,7 @@
                     <label class="control-label">用户名</label>
 
                     <div class="controls">
-                      <input name="username" type="text" value="{{ request.form.username }}" class="span6 m-wrap popovers" data-trigger="hover" data-content="字母、数字或下划线，须以字母打头" data-original-title="提示" placeholder="请输入你的用户名"/>
+                      <input id="password" name="username" type="text" value="{{ request.form.username }}" class="span6 m-wrap popovers" data-trigger="hover" data-content="字母、数字或下划线，须以字母打头" data-original-title="提示" placeholder="请输入你的用户名"/>
 
                     </div>
 
@@ -226,18 +226,6 @@
                     <div class="controls">
 
                       <input id="password" name="password" value="{{ request.form.password }}" type="password" type="text" class="span6 m-wrap" placeholder="请输入你的密码"/>
-
-                    </div>
-
-              </div>
-
-              <div class="control-group">
-
-                    <label class="control-label">确认密码</label>
-
-                    <div class="controls">
-
-                      <input name="password2" type="password" value="{{ request.form.password2 }}" type="text" class="span6 m-wrap" placeholder="请再次输入你的密码"/>
 
                     </div>
 
@@ -290,7 +278,7 @@
 
                       <div class="input-icon left">
 
-                        <i class="icon-phone"></i><input name="mobile" value="{{ request.form.mobile }}" class="m-wrap " type="text" placeholder="请输入你的手机号" />  
+                        <i class="icon-phone"></i><input id="mobile" name="mobile" value="{{ request.form.mobile }}" class="m-wrap " type="text" placeholder="请输入你的手机号" />  
 
                       </div>
                     </div>
@@ -303,7 +291,7 @@
 
                       <label class="checkbox">
 
-                      <input id="isadminCkb" name="isadmin" type="checkbox" 
+                      <input id="isadmin" name="isadmin" type="checkbox" 
                       {% if request.form.isadmin %} checked="checked" {% endif %} />
                       </label>
 
@@ -376,9 +364,21 @@
          });
          $('#btnEditUser').on('click', function(){
             $('tbody').find('tr').each(function(){
-              cbx = $(this).find('.checkboxes')[0];
+              var cbx = $(this).find('.checkboxes')[0];
               if (cbx.checked) {
-                oid = $(this).find('td')[1].textContent;
+                var oid = $(this).find('td')[1].textContent;
+                var users = {{users|tojson|safe}};
+                for(var i =0; i<users.length;i++){
+                  var user = users[i];
+                  if (user.oid == oid) {
+                    $('#username').attr('value',user.name);
+                    $('#password').attr('value',user.password);
+                    $('#email').attr('value',user.email);
+                    $('#mobile').attr('value',user.mobile);
+                    alert(user.isadmin)
+                    $('#isadmin').attr('checked',user.isadmin>0?'checked':'');
+                  };
+                }
               };
               // tr = $(this).find('tr');
               // cbx = this.find('td')[0];

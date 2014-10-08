@@ -28,12 +28,6 @@ var FormUserValidation = function () {
                         minlength: 5,
                         maxlength: 20
                     },
-                    password2: {
-                        required: true,
-                        minlength: 5,
-                        maxlength: 20,
-                        equalTo: "#password"
-                    },
                     email: {
                         required: true,
                         email: true
@@ -53,12 +47,6 @@ var FormUserValidation = function () {
                         required: "密码不能为空",
                         minlength: "密码长度不能小于5个字符",
                         maxlength: "密码长度不能大于20个字符"
-                    },
-                    password2: {
-                        required: "密码不能为空",
-                        minlength: "密码长度不能小于5个字符",
-                        maxlength: "密码长度不能大于20个字符",
-                        equalTo: "密码两次输入不一致"
                     },
                     email: {
                         required: "邮箱不能为空",
