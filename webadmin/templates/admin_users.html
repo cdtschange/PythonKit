@@ -213,7 +213,7 @@
                     <label class="control-label">用户名</label>
 
                     <div class="controls">
-                      <input id="password" name="username" type="text" value="{{ request.form.username }}" class="span6 m-wrap popovers" data-trigger="hover" data-content="字母、数字或下划线，须以字母打头" data-original-title="提示" placeholder="请输入你的用户名"/>
+                      <input id="username" name="username" type="text" value="{{ request.form.username }}" class="span6 m-wrap popovers" data-trigger="hover" data-content="字母、数字或下划线，须以字母打头" data-original-title="提示" placeholder="请输入你的用户名"/>
 
                     </div>
 
@@ -375,8 +375,12 @@
                     $('#password').attr('value',user.password);
                     $('#email').attr('value',user.email);
                     $('#mobile').attr('value',user.mobile);
-                    alert(user.isadmin)
                     $('#isadmin').attr('checked',user.isadmin>0?'checked':'');
+                    if (user.isadmin>0) {
+                      $('#isadmin').parent().addClass('checked');
+                    }else{
+                      $('#isadmin').parent().removeClass('checked');
+                    }
                   };
                 }
               };
