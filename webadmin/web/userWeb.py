@@ -29,50 +29,39 @@ def users_get_post():
         isadmin = len(isadmin)
         args = {'name':name, 'password':password, 'gender':gender
                 , 'email':email, 'mobile':mobile, 'isadmin':isadmin}
-        print args
         result, obj = base_post_obj(userProvider,args)
         if obj is not None:
             result['user'] = obj
-        return jsonify(result), 201  
-#         if result and result['status'] != 0 or obj is None:
-#             error = result['msg']
-#             return redirect('#')
-#         return render_template('admin_users.html')
+        return jsonify(result), 201
     else:
         result, objs = base_get_list(userProvider)
         return render_template('admin_users.html', users = objs)
 
 
-@user_web_admin.route('/ucenter/users/<string:oid>', methods = ['GET'])
+@user_web_admin.route('/admin/users/<string:oid>', methods = ['GET','PUT'])
 @login_required_web
-def user_get(oid):
-    result, obj = base_get_obj(userProvider,oid)
-    if obj is None:
-        abort(404)
-    return render_template('users.html', users = [obj])
-
-@user_web_admin.route('/ucenter/updateuser/<string:oid>', methods = ['GET','POST'])
-@login_required
-def user_put(oid):
-    error = None
-    if request.method == 'POST':
+def user_get_put(oid):
+    if request.method == 'PUT':
         name = request.form['username']
         password = request.form['password']
-        if not name or not password:
-            error = '用户名或密码不能为空'
-        else:
-            args = {'name':name, 'password':password}
-            result, obj = base_put_obj(userProvider,oid,args)
-            if result and result['status'] != 0 or obj is None:
-                error = result['msg']
-            else:
-                flash('更新成功')
-        return render_template('updateuser.html', error = error)
+        gender = request.form['genderRadio']
+        email = request.form['email']
+        mobile = request.form['mobile']
+        isadmin = request.form.getlist('isadmin')
+        isadmin = len(isadmin)
+        args = {'name':name, 'password':password, 'gender':gender
+                , 'email':email, 'mobile':mobile, 'isadmin':isadmin}
+        print args
+        if password == '':
+            args.delete('password')
+        result, msg = base_put_obj(userProvider,oid,args)
+        return jsonify(result), 201
     else:
         result, obj = base_get_obj(userProvider,oid)
-        if obj is None:
-            abort(404)
-        return render_template('updateuser.html', error = error, username = obj['name'])
+        if obj is not None:
+            result['user'] = obj
+        return jsonify(result), 404
+
 
 @user_web_admin.route('/ucenter/users/<string:oid>', methods = ['DELETE'])
 def user_delete(oid):

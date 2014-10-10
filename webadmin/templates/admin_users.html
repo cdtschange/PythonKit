@@ -84,7 +84,7 @@
 
                 <div class="actions">
 
-                  <a data-toggle="modal" data-target="#userModal" class="btn blue"><i class="icon-pencil"></i> 添加</a>
+                  <a id="btnAddUser" data-toggle="modal" data-target="#userModal" class="btn blue"><i class="icon-pencil"></i> 添加</a>
 
                   <div class="btn-group">
 
@@ -198,16 +198,16 @@
         <div class="row-fluid">
           <div class="span12">
 
-                  <div class="alert alert-error hide">
-
-                    <button class="close" data-dismiss="alert"></button>
-
-                    <span id="errorSpan">错误</span>
-
-                  </div>
         <!-- BEGIN FORM-->
             <form id="form_user" action="#" class="form-horizontal" method="post">
 
+              <div class="alert alert-error hide">
+
+                <button class="close" data-dismiss="alert"></button>
+
+                <span id="errorSpan">错误</span>
+
+              </div>
               <div class="control-group">
 
                     <label class="control-label">用户名</label>
@@ -340,7 +340,7 @@
 
   <script type="text/javascript" src="{{ url_for('static', filename='media/js/chosen.jquery.min.js') }}"></script>
 
-  <script type="text/javascript" src="{{ url_for('static', filename='media/js/form-user-validation.js') }}"></script> 
+  <script type="text/javascript" src="{{ url_for('static', filename='media/js/manager-user.js') }}"></script> 
 {% endblock %}
 
 {% block script %}
@@ -352,7 +352,8 @@
 
          TableManaged.init();
 
-         FormUserValidation.init();
+         UserManager.init();
+
          $('ul.page-sidebar-menu').find($('li')).removeClass("active");
          $("#li_user").addClass("active");
 
@@ -362,7 +363,9 @@
          $('#userModal').on('hide.bs.modal', function () {
             $('body').css('overflow','auto');
          });
+
          $('#btnEditUser').on('click', function(){
+            UserManager.resetForm();
             $('tbody').find('tr').each(function(){
               var cbx = $(this).find('.checkboxes')[0];
               if (cbx.checked) {
@@ -371,11 +374,13 @@
                 for(var i =0; i<users.length;i++){
                   var user = users[i];
                   if (user.oid == oid) {
+                    var form1 = $('#form_user');
+                    UserManager.uid = oid;
                     $('#username').attr('value',user.name);
                     $('#password').attr('value',user.password);
                     $('#email').attr('value',user.email);
                     $('#mobile').attr('value',user.mobile);
-                    $('#isadmin').attr('checked',user.isadmin>0?'checked':'');
+                    $('#isadmin').attr('checked',user.isadmin>0?'checked':null);
                     if (user.isadmin>0) {
                       $('#isadmin').parent().addClass('checked');
                     }else{
@@ -384,19 +389,16 @@
                   };
                 }
               };
-              // tr = $(this).find('tr');
-              // cbx = this.find('td')[0];
-              // if (cbx.checked) {
-              //   alert(1);
-              // };
-            // alert($(this).find('td').eq(1).find('input').val());
-            // alert($(this).find('td').eq(2).find('select').val());
             });
-            // var rows=$('#trUser');
-            // alert(rows.length);
-            // for(var i=0;i<rows.length;i++){
-            //   alert(rows[i]);
-            // }
+         });
+        $('#btnAddUser').on('click', function(){
+          $('#form_user .control-group').removeClass('error');
+          UserManager.resetForm();
+          UserManager.uid = null;
+          $('#username').attr('value','');
+          $('#password').attr('value','');
+          $('#email').attr('value','');
+          $('#mobile').attr('value','');
          });
       });
 

@@ -38,7 +38,7 @@ class UserProvider(BaseProvider):
     
     def updateById(self, oid, params):
         uparams = {}
-        filters = ['name','password','mobile','email']
+        filters = ['name','password','gender','mobile','email','isadmin']
         for key in params:
             if key in filters and params[key] is not None:
                 if key == 'password':
