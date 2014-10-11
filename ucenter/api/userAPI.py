@@ -19,7 +19,7 @@ userProvider = UserProvider()
 
 user_api = Blueprint('user_api', __name__)
 
-@user_api.route('/api/ucenter/login', methods = ['POST'])
+@user_api.route('v1/api/ucenter/login', methods = ['POST'])
 def users_login():
     args = parser.parse_args()
     if not valide_params(['name','password'],args):
