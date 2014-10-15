@@ -25,7 +25,7 @@ except IOError as e:
     print("*** file open error:",e)
 else:
     # display contents to the Screen
-    ff = open ( os.path.split(fname)[0]+'/result.txt', 'w' )  
+    ff = open ( fname+' copy', 'w' )  
     for eachLine in fobj:
         egex=ur"(\d+:\d+:)(\d+)(,\d+)" #正则表达式
         newline = re.sub(egex, offset_repl, eachLine)
